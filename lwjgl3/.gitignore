@@ -1,0 +1,35 @@
+# Java-specific ignores
+*.class
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+*.war
+*.ear
+*.iml
+*.ipr
+*.iws
+*.log
+*.DS_Store
+*.idea/
+out/
+build/
+target/
+
+# Gradle-specific ignores
+gradle/
+build/
+
+# Android-specific ignores
+*.apk
+*.ap_
+/local.properties
+/.cxx/
+/captures/
+/output.json
+
+# IntelliJ/Android Studio project files
+.idea/
+/*.iml
+*.hprof
+
+# Desktop launch configurations (optional)
+bin/
