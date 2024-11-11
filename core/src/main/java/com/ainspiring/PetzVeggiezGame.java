@@ -28,6 +28,9 @@ public class PetzVeggiezGame extends Game {
         sprite = new Sprite(image);
         position = new Vector2(Gdx.graphics.getWidth() / 2, sprite.getHeight() / 2 * sprite.getScaleY() / 2);
         LOGGER.info("Testing logging capabilities");
+        LOGGER.debug("Testing debug logs");
+        LOGGER.error("Testing if the log file will be created");
+        LOGGER.fatal("Testing if fatal logs will be added to the file");
     }
 
         @Override
