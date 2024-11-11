@@ -1,5 +1,8 @@
 package com.ainspiring;
 
+import org.apache.logging.log4j.Logger;
+
+import com.ainspiring.LoggerFactory;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,6 +13,9 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class PetzVeggiezGame extends Game {
+
+     private static final Logger LOGGER = LoggerFactory.getLogger(PetzVeggiezGame.class);
+
     private SpriteBatch batch;
     private Sprite sprite;
     private Texture image;
@@ -21,6 +27,7 @@ public class PetzVeggiezGame extends Game {
         image = new Texture("yellow.png");
         sprite = new Sprite(image);
         position = new Vector2(Gdx.graphics.getWidth() / 2, sprite.getHeight() / 2 * sprite.getScaleY() / 2);
+        LOGGER.info("Testing logging capabilities");
     }
 
         @Override
@@ -29,7 +36,6 @@ public class PetzVeggiezGame extends Game {
         batch.begin();
         sprite.draw(batch);
         sprite.setPosition(position.x, position.y);
-        
         batch.end();
     }
 }

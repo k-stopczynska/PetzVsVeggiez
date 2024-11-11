@@ -23,6 +23,8 @@
 
 -dontwarn android.support.**
 -dontwarn com.badlogic.gdx.backends.android.AndroidFragmentApplication
+-dontwarn org.osgi.framework.**
+-dontnote org.osgi.framework.**
 
 # Needed by the gdx-controllers official extension.
 -keep class com.badlogic.gdx.controllers.android.AndroidControllers

@@ -1,6 +1,7 @@
 buildscript {
   repositories {
     gradlePluginPortal()
+    mavenCentral()
   }
   dependencies {
     if(enableGraalNative == 'true') {
@@ -10,6 +11,7 @@ buildscript {
 }
 
 plugins {
+  id "java"
   id "io.github.fourlastor.construo" version "1.2.0"
   id "application"
   id "checkstyle"

@@ -1,3 +1,16 @@
+
+
+
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+}
+
+plugins {
+  id 'java'
+}
+
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 eclipse.project.name = appName + '-core'
 
@@ -9,4 +22,12 @@ dependencies {
   api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
   api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
   api "com.badlogicgames.gdx:gdx:$gdxVersion"
+  implementation ("org.apache.logging.log4j:log4j-api:2.20.0") {
+    exclude group: 'org.osgi'
+}
+  implementation ("org.apache.logging.log4j:log4j-core:2.20.0") {
+    exclude group: 'org.osgi'
+}
+  implementation "org.apache.logging.log4j:log4j-slf4j-impl:2.20.0"
+  implementation "org.apache.logging.log4j:log4j-layout-template-json:2.20.0"
 }
