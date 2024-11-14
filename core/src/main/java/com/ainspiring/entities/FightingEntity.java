@@ -9,9 +9,9 @@ public abstract class FightingEntity extends Entity {
     
     protected int damage;
     protected int speed;
-    protected Animation<TextureRegion> runningAnimation;
-    protected Animation<TextureRegion> walkingAnimation;
-    protected Animation<TextureRegion> attackingAnimation;
+    protected Animation<TextureRegion> runAnimation;
+    protected Animation<TextureRegion> walkAnimation;
+    protected Animation<TextureRegion> specialAttackAnimation;
     protected Animation<TextureRegion> idleAnimation;
     protected Animation<TextureRegion> hurtAnimation;
     protected Animation<TextureRegion> dieAnimation;
@@ -33,15 +33,15 @@ public abstract class FightingEntity extends Entity {
     }
 
     public void setRunningAnimation(Animation<TextureRegion> animation) {
-        this.runningAnimation = animation;
+        this.runAnimation = animation;
     }
 
     public void setWalkingAnimation(Animation<TextureRegion> animation) {
-        this.walkingAnimation = animation;
+        this.walkAnimation = animation;
     }
 
-    public void setAttackingAnimation(Animation<TextureRegion> animation) {
-        this.attackingAnimation = animation;
+    public void setAttackAnimation(Animation<TextureRegion> animation) {
+        this.specialAttackAnimation = animation;
     }
 
     public void setIdleAnimation(Animation<TextureRegion> animation) {
@@ -52,7 +52,7 @@ public abstract class FightingEntity extends Entity {
         this.hurtAnimation = animation;
     }
 
-    public void setDyingAnimation(Animation<TextureRegion> animation) {
+    public void setDieAnimation(Animation<TextureRegion> animation) {
         this.dieAnimation = animation;
     }
 
