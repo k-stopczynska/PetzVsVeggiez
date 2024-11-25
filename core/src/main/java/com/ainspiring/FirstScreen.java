@@ -1,9 +1,12 @@
 package com.ainspiring;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 /** First screen of the application. Displayed after the application is created. */
 public class FirstScreen implements Screen {
+
     @Override
     public void show() {
         // Prepare your screen here.

@@ -14,6 +14,7 @@ public abstract class Entity {
     protected Texture image;
 
     public Entity(Texture image, Vector2 position, int health, int cost) {
+        this.image = image;
         this.health = health;
         this.cost = cost;
         this.position = position;

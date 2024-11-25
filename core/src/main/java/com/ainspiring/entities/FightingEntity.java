@@ -28,7 +28,6 @@ public abstract class FightingEntity extends Entity {
 
     @Override
     public void update(float delta) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
