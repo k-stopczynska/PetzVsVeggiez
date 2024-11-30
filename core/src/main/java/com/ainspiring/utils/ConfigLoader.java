@@ -1,17 +1,12 @@
 package com.ainspiring.utils;
 
-import java.util.Map;
 
 import org.apache.logging.log4j.Logger;
 
-import com.ainspiring.PetzVeggiezGame;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.ObjectMap;
-
+import java.util.Map;
 import java.util.HashMap;
-import java.util.List;
 
 public class ConfigLoader {
 
@@ -30,7 +25,6 @@ public class ConfigLoader {
                    int level = Integer.parseInt(entry.getKey());
                    levelConfigs.put(level, entry.getValue());
                }
-               LOGGER.info("LEVEL CONFIGS: " + levelConfigs);
         }
 
         public LevelConfig getLevelConfig(int level) {

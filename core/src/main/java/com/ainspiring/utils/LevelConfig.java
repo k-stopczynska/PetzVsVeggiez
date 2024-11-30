@@ -22,4 +22,16 @@ public class LevelConfig {
     public List<Prototype> getObstacles() {
         return obstacles;
     }
+
+    public void setVeggiez(List<Prototype> veggiez) {
+        this.veggiez = veggiez;
+    }
+
+    public void setPetz(List<Prototype> petz) {
+        this.petz = petz;
+    }
+    
+        public void setObstacles(List<Prototype> obstacles) {
+        this.obstacles = obstacles;
+    }
 }
