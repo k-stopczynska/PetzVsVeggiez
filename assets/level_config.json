@@ -1,0 +1,175 @@
+{
+	"levels": {
+		"1": {
+			"veggiez": [
+				{
+					"image": "Broccoli.png",
+					"health": 100,
+					"cost": 0,
+					"speed": 2,
+					"damage": 10
+				},
+				{
+					"image": "Celery.png",
+					"health": 80,
+					"cost": 0,
+					"speed": 3,
+					"damage": 8
+				},
+				{
+					"image": "Carrot.png",
+					"health": 90,
+					"cost": 0,
+					"speed": 1,
+					"damage": 12
+				}
+			],
+			"petz": [
+				{
+					"image": "Pumpkin.png",
+					"health": 100,
+					"cost": 0,
+					"speed": 2,
+					"damage": 10
+				},
+				{
+					"image": "Peas.png",
+					"health": 80,
+					"cost": 0,
+					"speed": 3,
+					"damage": 8
+				},
+				{
+					"image": "Mushroom.png",
+					"health": 90,
+					"cost": 0,
+					"speed": 1,
+					"damage": 12
+				}
+			],
+			"obstacles": [
+				{
+					"image": "Potato.png",
+					"health": 100,
+					"cost": 0,
+					"speed": 2,
+					"damage": 10
+				}
+			]
+		},
+		"2": {
+			"veggiez": [
+				{
+					"image": "Broccoli.png",
+					"health": 100,
+					"cost": 0,
+					"speed": 2,
+					"damage": 10
+				},
+				{
+					"image": "Celery.png",
+					"health": 80,
+                    "cost": 0,
+					"speed": 3,
+					"damage": 8
+				},
+				{
+					"image": "Carrot.png",
+					"health": 90,
+					"cost": 0,
+					"speed": 1,
+					"damage": 12
+				}
+			],
+			"petz": [
+				{
+					"image": "Corn.png",
+					"health": 100,
+					"cost": 0,
+					"speed": 2,
+					"damage": 10
+				},
+				{
+					"image": "Cauliflower.png",
+					"health": 80,
+					"cost": 0,
+					"speed": 3,
+					"damage": 8
+				},
+				{
+					"image": "Pumpkin.png",
+					"health": 90,
+					"cost": 0,
+					"speed": 1,
+					"damage": 12
+				}
+			],
+			"obstacles": [
+				{
+					"image": "Potato.png",
+					"health": 100,
+					"cost": 0,
+					"speed": 2,
+					"damage": 10
+				}
+			]
+		},
+		"3": {
+			"veggiez": [
+				{
+					"image": "Corn.png",
+					"health": 100,
+					"cost": 0,
+					"speed": 2,
+					"damage": 10
+				},
+				{
+					"image": "Mushroom.png",
+					"health": 80,
+					"cost": 0,
+					"speed": 3,
+					"damage": 8
+				},
+				{
+					"image": "Leek.png",
+					"health": 90,
+					"cost": 0,
+					"speed": 1,
+					"damage": 12
+				}
+			],
+			"petz": [
+				{
+					"image": "Corn.png",
+					"health": 100,
+					"cost": 0,
+					"speed": 2,
+					"damage": 10
+				},
+				{
+					"image": "Mushroom.png",
+					"health": 80,
+					"cost": 0,
+					"speed": 3,
+					"damage": 8
+				},
+				{
+					"image": "Peas.png",
+					"health": 90,
+					"cost": 0,
+					"speed": 1,
+					"damage": 12
+				}
+			],
+			"obstacles": [
+				{
+					"image": "Potato.png",
+					"health": 100,
+					"cost": 0,
+					"speed": 2,
+					"damage": 10
+				}
+			]
+		}
+	}
+}

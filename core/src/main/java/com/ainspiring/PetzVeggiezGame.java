@@ -2,10 +2,10 @@ package com.ainspiring;
 
 import org.apache.logging.log4j.Logger;
 
-import com.ainspiring.LoggerFactory;
 import com.ainspiring.board.Board;
 import com.ainspiring.entities.Veggie;
 import com.ainspiring.entities.VeggiezBrain;
+import com.ainspiring.utils.LoggerFactory;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;

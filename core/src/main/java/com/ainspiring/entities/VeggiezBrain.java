@@ -1,6 +1,7 @@
 package com.ainspiring.entities;
 
 import com.ainspiring.board.Board;
+import com.ainspiring.utils.ConfigLoader;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -37,16 +38,18 @@ public class VeggiezBrain {
     }
 
     private void spawnVeggie() {
-        int randomRow = new Random().nextInt(board.getRowCount());
+        int randomRow = new Random().nextInt(board.getRowCount() + 1);
         int y = board.getOffsetY() + randomRow * board.getCellHeight() - 16 + board.getCellHeight() / 2;
         Vector2 position = new Vector2(board.getBoardWidth() + board.getOffsetX() + 64, y);
+        ConfigLoader configLoader = new ConfigLoader();
+        configLoader.loadConfig();
         Texture image = new Texture("Broccoli.png");
         Veggie veggie = new Veggie(image, position, 100, 0, 10, 2);
         veggies.add(veggie);
     }
     
     private void spawnVeggieWave() {
-    int veggieCount = (int) (Math.random() * 5) + 3; // Spawn 3 to 7 veggies
+    int veggieCount = (int) (Math.random() * 4) + 1;
     for (int i = 0; i < veggieCount; i++) {
         spawnVeggie();
     }
