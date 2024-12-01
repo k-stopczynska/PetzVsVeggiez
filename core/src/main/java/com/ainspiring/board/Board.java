@@ -9,8 +9,8 @@ public class Board {
 
     private final int ROWS = 5;
     private final int COLS = 8;
-    private final int CELL_WIDTH = 64;
-    private final int CELL_HEIGHT = 64;
+    private final int CELL_WIDTH = 128;
+    private final int CELL_HEIGHT = 128;
     private ShapeRenderer shapeRenderer;
 
     public Board() {

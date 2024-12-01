@@ -1,6 +1,6 @@
 package com.ainspiring.entities;
 
-import com.ainspiring.PetzVeggiezGame;
+
 import com.ainspiring.board.Board;
 import com.ainspiring.utils.ConfigLoader;
 import com.ainspiring.utils.LevelConfig;
@@ -45,7 +45,7 @@ public class VeggiezBrain {
             }
 
             for (Veggie veggie : veggies) {
-                veggie.move(delta);
+                veggie.update(delta);
             }
         }
     }
@@ -72,9 +72,9 @@ public class VeggiezBrain {
         } while (usedRows.contains(randomRow));
         usedRows.add(randomRow);
 
-
         int y = board.getOffsetY() + randomRow * board.getCellHeight() - 16 + board.getCellHeight() / 2;
         Vector2 position = new Vector2(board.getBoardWidth() + board.getOffsetX() + 64, y);
+        LOGGER.info("POS X: " + position.x + "POS Y: " + position.y);
         return position;
     }
     

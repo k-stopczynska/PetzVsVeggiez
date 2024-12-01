@@ -30,8 +30,6 @@ public class PetzVeggiezGame extends Game {
 
     private SpriteBatch batch;
     private Sprite sprite;
-    private Texture image;
-    private Vector2 position;
 
     private Board board;
     private VeggiezBrain veggiezBrain;
@@ -41,9 +39,7 @@ public class PetzVeggiezGame extends Game {
         // setScreen(new FirstScreen());       
         board = new Board(); 
         batch = new SpriteBatch();
-        image = new Texture("yellow.png");
-        sprite = new Sprite(image);
-        position = new Vector2(Gdx.graphics.getWidth() / 2, sprite.getHeight() / 2 * sprite.getScaleY() / 2);
+
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
         camera = new OrthographicCamera(30, 30 * (h / w));
@@ -56,7 +52,7 @@ public class PetzVeggiezGame extends Game {
 
     @Override
     public void render() {
-        ScreenUtils.clear(0.34f, 1.54f, 0.74f, 1f);
+        ScreenUtils.clear(0.04f, 2.54f, 0.44f, 1f);
         board.render();
         float delta = Gdx.graphics.getDeltaTime();
         veggiezBrain.update(delta);
@@ -67,10 +63,9 @@ public class PetzVeggiezGame extends Game {
 
         for (Veggie veggie : veggiezBrain.getVeggies()) {
             batch.draw(veggie.getImage(), veggie.getPosition().x, veggie.getPosition().y);
+            // TODO: implement drawing a veggies so they will scale up properly and not cause memory leaks 
+            // veggie.draw(batch);
         }
-        sprite.draw(batch);
-        sprite.setPosition(position.x, position.y);
-
         batch.end();
     }
 
@@ -98,6 +93,4 @@ public class PetzVeggiezGame extends Game {
         batch.dispose();
         board.dispose();
     }
-
-
 }

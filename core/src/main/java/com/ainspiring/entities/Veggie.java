@@ -10,8 +10,8 @@ public class Veggie extends FightingEntity {
         super(image, position, health, cost, damage, speed);
     }
 
-    
-    public void move(float delta) {
+    @Override
+    public void update(float delta) {
         if (this.health > 0) {
             elapsedTime += delta;
             if (position.x > 0) {
