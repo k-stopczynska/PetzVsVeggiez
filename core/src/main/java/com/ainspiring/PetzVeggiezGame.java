@@ -27,7 +27,7 @@ public class PetzVeggiezGame extends Game {
     private static final Logger LOGGER = LoggerFactory.getLogger(PetzVeggiezGame.class);
 
     private Viewport viewport;
-    private Camera camera;
+    private OrthographicCamera camera;
     private Stage stage;
 
     private SpriteBatch batch;
@@ -46,18 +46,20 @@ public class PetzVeggiezGame extends Game {
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
         camera = new OrthographicCamera(30, 30 * (h / w));
-        viewport = new ExtendViewport(720, 475, camera);
-        camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
-        camera.update();
+viewport = new ExtendViewport(30, 30 * (h / w), camera);
+viewport.apply(); // Ensures the viewport settings take effect
+camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
+camera.update();
         stage = new Stage(viewport, batch);
         veggiezBrain = new VeggiezBrain(board);
         petHub = new PetHub();
 
-        Gdx.input.setInputProcessor(new PetDragHandler(petHub));
+        Gdx.input.setInputProcessor(new PetDragHandler(petHub, camera));
     }
 
     @Override
     public void render() {
+        
         ScreenUtils.clear(0.04f, 2.54f, 0.44f, 1f);
         board.render();
         
