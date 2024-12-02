@@ -6,6 +6,8 @@ import com.ainspiring.board.Board;
 import com.ainspiring.entities.Veggie;
 import com.ainspiring.entities.VeggiezBrain;
 import com.ainspiring.utils.LoggerFactory;
+import com.ainspiring.utils.PetDragHandler;
+import com.ainspiring.utils.PetHub;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -33,6 +35,7 @@ public class PetzVeggiezGame extends Game {
 
     private Board board;
     private VeggiezBrain veggiezBrain;
+    private PetHub petHub;
 
     @Override
     public void create() {
@@ -48,19 +51,23 @@ public class PetzVeggiezGame extends Game {
         camera.update();
         stage = new Stage(viewport, batch);
         veggiezBrain = new VeggiezBrain(board);
+        petHub = new PetHub();
+
+        Gdx.input.setInputProcessor(new PetDragHandler(petHub));
     }
 
     @Override
     public void render() {
         ScreenUtils.clear(0.04f, 2.54f, 0.44f, 1f);
         board.render();
+        
         float delta = Gdx.graphics.getDeltaTime();
         veggiezBrain.update(delta);
         if (veggiezBrain.isWaveOver()) {
             veggiezBrain.startWave();
         }
         batch.begin();
-
+        petHub.render(batch);
         for (Veggie veggie : veggiezBrain.getVeggies()) {
             batch.draw(veggie.getImage(), veggie.getPosition().x, veggie.getPosition().y);
             // TODO: implement drawing a veggies so they will scale up properly and not cause memory leaks 

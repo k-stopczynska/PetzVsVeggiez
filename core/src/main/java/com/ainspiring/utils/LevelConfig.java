@@ -1,8 +1,5 @@
 package com.ainspiring.utils;
 
-import com.ainspiring.entities.Obstacle;
-import com.ainspiring.entities.Pet;
-import com.ainspiring.entities.Veggie;
 
 import java.util.List;
 

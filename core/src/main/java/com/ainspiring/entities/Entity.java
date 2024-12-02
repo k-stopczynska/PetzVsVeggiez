@@ -20,7 +20,7 @@ public abstract class Entity {
         this.position = position;
         sprite = new Sprite(image);
         // TODO: this is not working properly until we change the method of drawing veggiez onto board in render method in PetzVeggiezGame
-        sprite.setScale(4f);
+        // sprite.setScale(4f);
     }
     
     public abstract void update(float delta);
