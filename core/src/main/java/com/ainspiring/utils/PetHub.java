@@ -1,14 +1,11 @@
 package com.ainspiring.utils;
 
-import java.util.Collection;
+
 import java.util.List;
-import java.util.Random;
 
 import org.apache.logging.log4j.Logger;
 
-import com.ainspiring.PetzVeggiezGame;
 import com.ainspiring.entities.Pet;
-import com.ainspiring.entities.Veggie;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -20,6 +17,7 @@ public class PetHub {
 
     private Array<Pet> availablePets;
     private ConfigLoader configLoader;
+
 
     public PetHub() {
         availablePets = new Array<>();
@@ -34,8 +32,8 @@ public class PetHub {
         LevelConfig levelConfig = configLoader.getLevelConfig(1);
         if (levelConfig != null && levelConfig.getPetz() != null && !levelConfig.getPetz().isEmpty()) {
             List<Prototype> petConfig = levelConfig.getPetz();
-            float x = 620;
-            float y = 800;
+            float x = 400;
+            float y = 600;
             for (Prototype config : petConfig) {
 
                 Vector2 position = new Vector2(x, y);
@@ -45,10 +43,7 @@ public class PetHub {
                 
                 pet.setPosition(x, y);
                 availablePets.add(pet);
-                x += 50;
-
-                LOGGER.info("Pet: " + pet.getTexture() + " position: " + position);
-                
+                x += 50;   
             }
         }
     }
