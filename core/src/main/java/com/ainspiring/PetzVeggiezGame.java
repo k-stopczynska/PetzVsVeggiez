@@ -126,24 +126,36 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
 	}
 
 	@Override public boolean touchDragged (int screenX, int screenY, int pointer) {
-		if (!dragging) return false;
-        Vector3 worldCoords = camera.unproject(touchPosition.set(screenX, screenY, 0));
-        float newX = worldCoords.x - (selectedPet.getWidth() / 2);
-        float newY = worldCoords.y - (selectedPet.getHeight() / 2);
-        selectedPet.setPosition(newX, newY);
-		return true;
+    if (!dragging || selectedPet == null || selectedPet.isPlaced()) 
+        return false;
+
+    Vector3 worldCoords = camera.unproject(touchPosition.set(screenX, screenY, 0));
+    float newX = worldCoords.x - (selectedPet.getWidth() / 2);
+    float newY = worldCoords.y - (selectedPet.getHeight() / 2);
+    selectedPet.setPosition(newX, newY);
+    return true;
 	}
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        if (button != Input.Buttons.LEFT || pointer > 0)
-            return false;
-        Vector3 worldCoords = camera.unproject(touchPosition.set(screenX, screenY, 0));
-        // TODO: check if pet is placed on the board but this is not working for now
-        // Vector2 position = new Vector2(worldCoords.x, worldCoords.y);
-        // board.placePet(selectedPet, position);
-        dragging = false;
-        return true;
+    if (button != Input.Buttons.LEFT || pointer > 0 || selectedPet == null) 
+        return false;
+
+    Vector3 worldCoords = camera.unproject(touchPosition.set(screenX, screenY, 0));
+    Vector2 position = new Vector2(worldCoords.x, worldCoords.y);
+
+    if (board.isPositionValid(position)) {
+        board.placePet(selectedPet, position);
+    } else {
+
+        if (!selectedPet.isPlaced()) {
+            selectedPet.resetPosition(); 
+        }
+    }
+
+    dragging = false;
+    selectedPet = null;
+    return true;
     }
     
     @Override
@@ -173,13 +185,7 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
 
     @Override
     public void resize(int width, int height) {
-        // stage.getViewport().update(width, height, true);
-        // camera.viewportWidth = 30f;
-        // camera.viewportHeight = 30f * height / width;
-        // camera.update();
         viewport.update(width, height, true);
-            LOGGER.info("Viewport resized: World Width = " + viewport.getWorldWidth()
-                    + ", World Height = " + viewport.getWorldHeight());
         camera.update();
     }
 

@@ -6,10 +6,8 @@ import java.util.List;
 import org.apache.logging.log4j.Logger;
 
 import com.ainspiring.entities.Pet;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -40,15 +38,14 @@ public class PetHub {
             float x = 400;
             float y = 600;
             for (Prototype config : petConfig) {
-
                 Vector2 position = new Vector2(x, y);
                 Texture image = new Texture(config.getImage());
                 Pet pet = new Pet(image, position, config.getHealth(), config.getCost(),
                         config.getDamage(), config.getSpeed());
-                
                 pet.setPosition(x, y);
+                pet.setOriginalPosition();
                 availablePets.add(pet);
-                x += 50;   
+                x += 50;
             }
         }
     }
@@ -64,7 +61,6 @@ public class PetHub {
     }
 
     public boolean isWithinBounds(float x, float y) {
-        LOGGER.info("is within bounds: " + bounds.contains(x, y));
         return bounds.contains(x, y);
     }
 }

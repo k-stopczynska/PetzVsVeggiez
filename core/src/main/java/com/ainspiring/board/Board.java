@@ -1,10 +1,15 @@
 package com.ainspiring.board;
 
+import org.apache.logging.log4j.Logger;
+
 import com.ainspiring.entities.Pet;
+import com.ainspiring.utils.LoggerFactory;
+import com.ainspiring.utils.PetHub;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
 
@@ -16,6 +21,8 @@ public class Board {
     private final int CELL_HEIGHT = 64;
     private ShapeRenderer shapeRenderer;
     private Array<Pet> petsOnBoard;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Board.class);
 
     public Board() {
         initializeGrid();
@@ -48,17 +55,20 @@ public class Board {
         }
     }
 
-    public boolean placePet(Pet pet, Vector2 position) {
-        if (isPositionValid(position)) {
-            petsOnBoard.add(pet);
-            // TODO: center the position before setting it
-            pet.setPosition(position.x, position.y);
-            return true;
-        }
-        return false;
+    public void placePet(Pet pet, Vector2 position) {
+    if (!isPositionValid(position)) return;
+    
+    pet.setPlaced(true);
+    petsOnBoard.add(pet);
+
+    //TODO: center a pet in a cell and mark cell occupied to check before setting another one
+    float newX = position.x;
+    float newY = position.y;
+
+    pet.setPosition(newX, newY);
     }
     
-        private boolean isPositionValid(Vector2 position) {
+    public boolean isPositionValid(Vector2 position) {
         return position.x >= getOffsetX() && position.x <= getOffsetX() + getBoardWidth()
                 && position.y >= getOffsetY() && position.y <= getOffsetY() + getBoardHeight();
     }
