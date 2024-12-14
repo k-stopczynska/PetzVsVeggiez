@@ -51,6 +51,7 @@ public class Board {
     public boolean placePet(Pet pet, Vector2 position) {
         if (isPositionValid(position)) {
             petsOnBoard.add(pet);
+            // TODO: center the position before setting it
             pet.setPosition(position.x, position.y);
             return true;
         }

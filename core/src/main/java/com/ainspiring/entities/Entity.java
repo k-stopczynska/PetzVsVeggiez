@@ -43,7 +43,15 @@ public abstract class Entity {
         boundingBox.set(x, y, sprite.getWidth(), sprite.getHeight());
     }
 
-        public Rectangle getBoundingBox() {
-            return boundingBox;
+    public Rectangle getBoundingBox() {
+        return boundingBox;
+    }
+    
+    public float getWidth() {
+        return sprite.getWidth();
+    }
+
+    public float getHeight() {
+        return sprite.getHeight();
     }
 }

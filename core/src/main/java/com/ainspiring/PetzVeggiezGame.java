@@ -66,7 +66,7 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
         viewport = new ExtendViewport(screenWidth, screenHeight, camera);
         viewport.update(screenWidth, screenHeight, true);
         viewport.apply();
-        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0); // Center the camera
+        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
         camera.update();
  
         touchPosition = new Vector3();
@@ -109,27 +109,28 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
 	@Override public boolean touchDown (int screenX, int screenY, int pointer, int button) {
         if (button != Input.Buttons.LEFT || pointer > 0)
             return false;
-         touchPosition.set(screenX, screenY, 0);
-		 camera.unproject(touchPosition);
+        touchPosition.set(screenX, screenY, 0);
+        camera.unproject(touchPosition);
+        if (!petHub.isWithinBounds(touchPosition.x, touchPosition.y))
+            return false;
+		
         this.dragging = true;
      
         for (Pet pet : this.petHub.getAvailablePets()) {
-            LOGGER.info("Touch Position: " + touchPosition.x + ", " + touchPosition.y);
-            LOGGER.info("Bounding Box: " + pet.getBoundingBox().x + ", " + pet.getBoundingBox().y + ", Width: " + pet.getBoundingBox().width + ", Height: " + pet.getBoundingBox().height);
-            LOGGER.info("Contains Result: " + pet.getBoundingBox().contains(touchPosition.x, touchPosition.y));
-           
             if (pet.getBoundingBox().contains(touchPosition.x, touchPosition.y)) {
                 selectedPet = pet;
-                
                 return true;
-            }
+            } 
         }
         return true;
 	}
 
 	@Override public boolean touchDragged (int screenX, int screenY, int pointer) {
 		if (!dragging) return false;
-		camera.unproject(touchPosition.set(screenX, screenY, 0));
+        Vector3 worldCoords = camera.unproject(touchPosition.set(screenX, screenY, 0));
+        float newX = worldCoords.x - (selectedPet.getWidth() / 2);
+        float newY = worldCoords.y - (selectedPet.getHeight() / 2);
+        selectedPet.setPosition(newX, newY);
 		return true;
 	}
 
@@ -137,7 +138,10 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         if (button != Input.Buttons.LEFT || pointer > 0)
             return false;
-        camera.unproject(touchPosition.set(screenX, screenY, 0));
+        Vector3 worldCoords = camera.unproject(touchPosition.set(screenX, screenY, 0));
+        // TODO: check if pet is placed on the board but this is not working for now
+        // Vector2 position = new Vector2(worldCoords.x, worldCoords.y);
+        // board.placePet(selectedPet, position);
         dragging = false;
         return true;
     }
