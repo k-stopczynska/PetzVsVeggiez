@@ -37,10 +37,14 @@ public abstract class Entity {
         this.health -= damage;
     }
 
-        public void setPosition(float x, float y) {
+    public void setPosition(float x, float y) {
         this.position.set(x, y);
         this.sprite.setPosition(x, y);
         boundingBox.set(x, y, sprite.getWidth(), sprite.getHeight());
+    }
+    
+    public Vector2 getPosition() {
+        return position;
     }
 
     public Rectangle getBoundingBox() {

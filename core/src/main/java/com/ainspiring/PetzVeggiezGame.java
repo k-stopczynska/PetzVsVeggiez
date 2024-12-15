@@ -144,15 +144,7 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
     Vector3 worldCoords = camera.unproject(touchPosition.set(screenX, screenY, 0));
     Vector2 position = new Vector2(worldCoords.x, worldCoords.y);
 
-    if (board.isPositionValid(position)) {
-        board.placePet(selectedPet, position);
-    } else {
-
-        if (!selectedPet.isPlaced()) {
-            selectedPet.resetPosition(); 
-        }
-    }
-
+    board.placePet(selectedPet, position);
     dragging = false;
     selectedPet = null;
     return true;

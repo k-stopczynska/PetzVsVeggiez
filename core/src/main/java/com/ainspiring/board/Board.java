@@ -19,12 +19,14 @@ public class Board {
     private final int COLS = 8;
     private final int CELL_WIDTH = 64;
     private final int CELL_HEIGHT = 64;
+    private Cell[][] boardGrid;
     private ShapeRenderer shapeRenderer;
     private Array<Pet> petsOnBoard;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Board.class);
 
     public Board() {
+        boardGrid = new Cell[ROWS][COLS];
         initializeGrid();
         shapeRenderer = new ShapeRenderer();
         petsOnBoard = new Array<>();
@@ -33,8 +35,8 @@ public class Board {
     public void render() {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.BLACK);
-        for (int row = 0; row <= ROWS; row++) {
-            for (int col = 0; col <= COLS; col++) {
+        for (int row = 0; row < ROWS; row++) {
+            for (int col = 0; col < COLS; col++) {
                 shapeRenderer.rect( getOffsetX() + col * CELL_WIDTH, 
                 getOffsetY() + row * CELL_HEIGHT, 
                 CELL_WIDTH, 
@@ -45,9 +47,6 @@ public class Board {
     }
 
     public void initializeGrid() {
-
-        Cell[][] boardGrid = new Cell[ROWS][COLS];
-
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLS; col++) {
                 boardGrid[row][col] = new Cell();
@@ -56,22 +55,51 @@ public class Board {
     }
 
     public void placePet(Pet pet, Vector2 position) {
-    if (!isPositionValid(position)) return;
-    
-    pet.setPlaced(true);
-    petsOnBoard.add(pet);
-
-    //TODO: center a pet in a cell and mark cell occupied to check before setting another one
-    float newX = position.x;
-    float newY = position.y;
-
-    pet.setPosition(newX, newY);
+        Vector2 newPosition = getCellForPet(pet);
+        int col = (int) newPosition.x;
+        int row = (int) newPosition.y;
+        if (!isPositionValid(col, row)) {
+            pet.resetPosition();
+            return;
+        }
+       
+        Cell cell = boardGrid[row][col];
+        cell.isOccupied = true;
+        pet.setPlaced(true);
+        petsOnBoard.add(pet);
+        float petX = centerPet(col, row, pet).x;
+        float petY = centerPet(col, row, pet).y;
+        pet.setPosition(petX, petY);
     }
-    
-    public boolean isPositionValid(Vector2 position) {
-        return position.x >= getOffsetX() && position.x <= getOffsetX() + getBoardWidth()
-                && position.y >= getOffsetY() && position.y <= getOffsetY() + getBoardHeight();
+
+    public boolean isPositionValid(int col, int row) {
+        Cell cell = null;
+        boolean isWithinBounds = col >= 0 && col < COLS && row >= 0 && row < ROWS;
+        if (isWithinBounds) {
+            cell = boardGrid[row][col];
+        }
+        return isWithinBounds && !cell.isOccupied;
     }
+
+    protected Vector2 centerPet(int col, int row, Pet pet) {
+        float centerX = getOffsetX() + (col * CELL_WIDTH) + (CELL_WIDTH / 2);
+        float centerY = getOffsetY() + (row * CELL_HEIGHT) + (CELL_HEIGHT / 2);
+
+        float petX = centerX - (pet.getWidth() / 2);
+        float petY = centerY - (pet.getHeight() / 2);
+
+        return new Vector2(petX, petY);
+    }
+
+    public Vector2 getCellForPet(Pet pet) {
+    float petX = pet.getPosition().x + (pet.getWidth() / 2); 
+    float petY = pet.getPosition().y + (pet.getHeight() / 2); 
+
+    int col = (int) ((petX - getOffsetX()) / CELL_WIDTH);
+    int row = (int) ((petY - getOffsetY()) / CELL_HEIGHT);
+
+    return new Vector2(col, row);
+}
 
     public int getRowCount() {
         return ROWS;
