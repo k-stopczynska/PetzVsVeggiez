@@ -96,6 +96,12 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
             // TODO: implement drawing a veggies so they will scale up properly and not cause memory leaks 
             // veggie.draw(batch);
         }
+        for (Pet pet : board.getPetsOnBoard()) {
+            pet.draw(batch);
+        }
+        if (dragging && selectedPet != null) {
+            selectedPet.draw(batch);
+        }
         batch.end();
     }
     
@@ -118,7 +124,7 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
      
         for (Pet pet : this.petHub.getAvailablePets()) {
             if (pet.getBoundingBox().contains(touchPosition.x, touchPosition.y)) {
-                selectedPet = pet;
+                selectedPet = pet.clone();
                 return true;
             } 
         }

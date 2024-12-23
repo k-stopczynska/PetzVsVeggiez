@@ -92,13 +92,17 @@ public class Board {
     }
 
     public Vector2 getCellForPet(Pet pet) {
-    float petX = pet.getPosition().x + (pet.getWidth() / 2); 
-    float petY = pet.getPosition().y + (pet.getHeight() / 2); 
+        float petX = pet.getPosition().x + (pet.getWidth() / 2);
+        float petY = pet.getPosition().y + (pet.getHeight() / 2);
 
-    int col = (int) ((petX - getOffsetX()) / CELL_WIDTH);
-    int row = (int) ((petY - getOffsetY()) / CELL_HEIGHT);
+        int col = (int) ((petX - getOffsetX()) / CELL_WIDTH);
+        int row = (int) ((petY - getOffsetY()) / CELL_HEIGHT);
 
-    return new Vector2(col, row);
+        return new Vector2(col, row);
+    }
+
+    public Array<Pet> getPetsOnBoard() {
+    return petsOnBoard;
 }
 
     public int getRowCount() {

@@ -42,4 +42,15 @@ public class Pet extends FightingEntity {
     public void setPlaced(boolean placed) {
         isPlaced = placed;
     }
+
+        public Pet clone() {
+        return new Pet(
+            new Texture(this.image.getTextureData()),
+            new Vector2(this.position.x, this.position.y),
+            this.health,
+            this.cost,
+            this.damage,
+            this.speed
+        );
+    }
 }
