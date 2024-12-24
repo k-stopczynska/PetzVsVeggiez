@@ -8,7 +8,7 @@ public class Pet extends FightingEntity {
     private Vector2 originalPosition;
     private boolean isPlaced;
 
-    public Pet(Texture image, Vector2 position, int health, int cost, int damage, int speed) {
+    public Pet(Texture image, Vector2 position, int health, int cost, int damage, float speed) {
         super(image, position, health, cost, damage, speed);
     }
 

@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Veggie extends FightingEntity {
     protected float elapsedTime = 0;
 
-    public Veggie(Texture image, Vector2 position, int health, int cost, int damage, int speed) {
+    public Veggie(Texture image, Vector2 position, int health, int cost, int damage, float speed) {
         super(image, position, health, cost, damage, speed);
     }
 

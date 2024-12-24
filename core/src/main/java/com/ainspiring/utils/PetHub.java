@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 
+import com.ainspiring.entities.ManaPet;
+import com.ainspiring.entities.Obstacle;
 import com.ainspiring.entities.Pet;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,7 +18,7 @@ public class PetHub {
 
  private static final Logger LOGGER = LoggerFactory.getLogger(PetHub.class);
 
-    private Array<Pet> availablePets;
+    private Array<Object> availablePets;
     private ConfigLoader configLoader;
     private Rectangle bounds;
 
@@ -35,20 +37,38 @@ public class PetHub {
         LevelConfig levelConfig = configLoader.getLevelConfig(1);
         if (levelConfig != null && levelConfig.getPetz() != null && !levelConfig.getPetz().isEmpty()) {
             List<Prototype> petConfig = levelConfig.getPetz();
+            List<Prototype> manaPetConfig = levelConfig.getManaPetz();
+            List<Prototype> obstaclesConfig = levelConfig.getObstacles();
             float x = 400;
             float y = 600;
             for (Prototype config : petConfig) {
-                Vector2 position = new Vector2(x, y);
-                Texture image = new Texture(config.getImage());
-                Pet pet = new Pet(image, position, config.getHealth(), config.getCost(),
-                        config.getDamage(), config.getSpeed());
-                pet.setPosition(x, y);
-                pet.setOriginalPosition();
+                Pet pet = createPetFromConfig(config, x, y);
                 availablePets.add(pet);
                 x += 50;
             }
+            // TODO: consider how to load and manage obstacles and mana pets as they share drag'n'drop logic but behave differently
+            // for (Prototype config : manaPetConfig) {
+            //     ManaPet manaPet = createPetFromConfig(config, x, y);
+            //     availablePets.add(manaPet);
+            //     x += 50;
+            // }
+            // for (Prototype config : obstaclesConfig) {
+            //     Obstacle obstacle = createPetFromConfig(config, x, y);
+            //     availablePets.add(obstacle);
+            //     x += 50;
+            // }
         }
     }
+
+    private Pet createPetFromConfig(Prototype config, float x, float y) {
+    Vector2 position = new Vector2(x, y);
+    Texture image = new Texture(config.getImage());
+    Pet pet = new Pet(image, position, config.getHealth(), config.getCost(),
+            config.getDamage(), config.getSpeed());
+    pet.setPosition(x, y);
+    pet.setOriginalPosition();
+    return pet;
+}
 
     public void render(SpriteBatch batch) {
         for (Pet pet : availablePets) {
