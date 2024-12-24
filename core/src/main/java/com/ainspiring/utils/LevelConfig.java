@@ -28,7 +28,7 @@ public class LevelConfig {
         this.petz = petz;
     }
     
-        public void setObstacles(List<Prototype> obstacles) {
+    public void setObstacles(List<Prototype> obstacles) {
         this.obstacles = obstacles;
     }
 }

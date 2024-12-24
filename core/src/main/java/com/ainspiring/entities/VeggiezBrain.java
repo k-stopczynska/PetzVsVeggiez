@@ -68,7 +68,7 @@ public class VeggiezBrain {
     private Vector2 getPosition(Set<Integer> usedRows) {
         int randomRow;
         do {
-            randomRow = new Random().nextInt(board.getRowCount() + 1);
+            randomRow = new Random().nextInt(board.getRowCount());
         } while (usedRows.contains(randomRow));
         usedRows.add(randomRow);
 

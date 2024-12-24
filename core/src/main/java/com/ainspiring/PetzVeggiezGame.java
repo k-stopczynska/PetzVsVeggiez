@@ -7,22 +7,17 @@ import com.ainspiring.entities.Pet;
 import com.ainspiring.entities.Veggie;
 import com.ainspiring.entities.VeggiezBrain;
 import com.ainspiring.utils.LoggerFactory;
-import com.ainspiring.utils.PetDragHandler;
 import com.ainspiring.utils.PetHub;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -125,6 +120,7 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
         for (Pet pet : this.petHub.getAvailablePets()) {
             if (pet.getBoundingBox().contains(touchPosition.x, touchPosition.y)) {
                 selectedPet = pet.clone();
+                selectedPet.setOriginalPosition();
                 return true;
             } 
         }

@@ -4,12 +4,10 @@ import org.apache.logging.log4j.Logger;
 
 import com.ainspiring.entities.Pet;
 import com.ainspiring.utils.LoggerFactory;
-import com.ainspiring.utils.PetHub;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
 
