@@ -51,28 +51,46 @@ public class PetHub {
                 availablePets.add(pet);
                 x += 50;
             }
-            // TODO: consider how to load and manage obstacles and mana pets as they share drag'n'drop logic but behave differently
-            // for (Prototype config : manaPetConfig) {
-            //     ManaPet manaPet = createPetFromConfig(config, x, y);
-            //     availablePets.add(manaPet);
-            //     x += 50;
-            // }
-            // for (Prototype config : obstaclesConfig) {
-            //     Obstacle obstacle = createPetFromConfig(config, x, y);
-            //     availablePets.add(obstacle);
-            //     x += 50;
-            // }
+            for (ManaPetPrototype config : manaPetConfig) {
+                ManaPet manaPet = createManaPetFromConfig(config, x, y);
+                availablePets.add(manaPet);
+                x += 50;
+            }
+            for (Prototype config : obstaclesConfig) {
+                Obstacle obstacle = createObstacleFromConfig(config, x, y);
+                availablePets.add(obstacle);
+                x += 50;
+            }
         }
     }
 
     private Pet createPetFromConfig(PetPrototype config, float x, float y) {
+        Vector2 position = new Vector2(x, y);
+        Texture image = new Texture(config.getImage());
+        Pet pet = new Pet(image, position, config.getHealth(), config.getCost(),
+                config.getDamage(), config.getSpeed());
+        pet.setPosition(x, y);
+        pet.setOriginalPosition();
+        return pet;
+    }
+
+    private ManaPet createManaPetFromConfig(ManaPetPrototype config, float x, float y) {
+        Vector2 position = new Vector2(x, y);
+        Texture image = new Texture(config.getImage());
+        ManaPet manaPet = new ManaPet(image, position, config.getHealth(), config.getCost(),
+                config.getMana(), config.getInterval());
+        manaPet.setPosition(x, y);
+        manaPet.setOriginalPosition();
+        return manaPet;
+    }
+
+    private Obstacle createObstacleFromConfig(Prototype config, float x, float y) {
     Vector2 position = new Vector2(x, y);
     Texture image = new Texture(config.getImage());
-    Pet pet = new Pet(image, position, config.getHealth(), config.getCost(),
-            config.getDamage(), config.getSpeed());
-    pet.setPosition(x, y);
-    pet.setOriginalPosition();
-    return pet;
+    Obstacle obstacle = new Obstacle(image, position, config.getHealth(), config.getCost());
+    obstacle.setPosition(x, y);
+    obstacle.setOriginalPosition();
+    return obstacle;
 }
 
     public void render(SpriteBatch batch) {

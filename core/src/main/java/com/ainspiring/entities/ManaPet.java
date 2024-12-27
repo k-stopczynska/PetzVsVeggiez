@@ -17,8 +17,7 @@ public class ManaPet extends Entity {
 
     @Override
     public void update(float delta) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        generateMana(delta);
     }
 
     public float generateMana(float delta) {

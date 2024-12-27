@@ -10,8 +10,6 @@ public class Obstacle extends Entity {
 
     @Override
     public void update(float delta) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
 
         public Obstacle clone() {
