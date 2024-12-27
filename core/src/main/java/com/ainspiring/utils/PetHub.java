@@ -18,7 +18,7 @@ public class PetHub {
 
  private static final Logger LOGGER = LoggerFactory.getLogger(PetHub.class);
 
-    private Array<Object> availablePets;
+    private Array<Pet> availablePets;
     private ConfigLoader configLoader;
     private Rectangle bounds;
 
