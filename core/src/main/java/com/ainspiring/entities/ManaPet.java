@@ -29,7 +29,18 @@ public class ManaPet extends Entity {
                 return this.mana;
             }
         }
-    return 0f;
+        return 0f;
+    }
+    
+        public ManaPet clone() {
+        return new ManaPet(
+            new Texture(this.image.getTextureData()),
+            new Vector2(this.position.x, this.position.y),
+            this.health,
+            this.cost,
+            this.mana,
+            this.interval
+        );
     }
 
 }

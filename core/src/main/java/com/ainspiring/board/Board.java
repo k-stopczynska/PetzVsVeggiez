@@ -2,7 +2,7 @@ package com.ainspiring.board;
 
 import org.apache.logging.log4j.Logger;
 
-import com.ainspiring.entities.Pet;
+import com.ainspiring.entities.Entity;
 import com.ainspiring.utils.LoggerFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -19,7 +19,7 @@ public class Board {
     private final int CELL_HEIGHT = 64;
     private Cell[][] boardGrid;
     private ShapeRenderer shapeRenderer;
-    private Array<Pet> petsOnBoard;
+    private Array<Entity> petsOnBoard;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Board.class);
 
@@ -52,7 +52,7 @@ public class Board {
         }
     }
 
-    public void placePet(Pet pet, Vector2 position) {
+    public void placePet(Entity pet, Vector2 position) {
         Vector2 newPosition = getCellForPet(pet);
         int col = (int) newPosition.x;
         int row = (int) newPosition.y;
@@ -79,7 +79,7 @@ public class Board {
         return isWithinBounds && !cell.isOccupied;
     }
 
-    protected Vector2 centerPet(int col, int row, Pet pet) {
+    protected Vector2 centerPet(int col, int row, Entity pet) {
         float centerX = getOffsetX() + (col * CELL_WIDTH) + (CELL_WIDTH / 2);
         float centerY = getOffsetY() + (row * CELL_HEIGHT) + (CELL_HEIGHT / 2);
 
@@ -89,7 +89,7 @@ public class Board {
         return new Vector2(petX, petY);
     }
 
-    public Vector2 getCellForPet(Pet pet) {
+    public Vector2 getCellForPet(Entity pet) {
         float petX = pet.getPosition().x + (pet.getWidth() / 2);
         float petY = pet.getPosition().y + (pet.getHeight() / 2);
 
@@ -99,7 +99,7 @@ public class Board {
         return new Vector2(col, row);
     }
 
-    public Array<Pet> getPetsOnBoard() {
+    public Array<Entity> getPetsOnBoard() {
     return petsOnBoard;
 }
 

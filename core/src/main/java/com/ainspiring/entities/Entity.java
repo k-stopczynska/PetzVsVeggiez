@@ -14,6 +14,8 @@ public abstract class Entity {
     protected Vector2 position;
     protected Texture image;
     private Rectangle boundingBox;
+    private Vector2 originalPosition;
+    private boolean isPlaced;
 
     public Entity(Texture image, Vector2 position, int health, int cost) {
         this.image = image;
@@ -22,11 +24,14 @@ public abstract class Entity {
         this.position = position;
         sprite = new Sprite(image);
         boundingBox = new Rectangle(position.x, position.y, sprite.getWidth(), sprite.getHeight());
+        
         // TODO: this is not working properly until we change the method of drawing veggiez onto board in render method in PetzVeggiezGame
         // sprite.setScale(4f);
     }
     
     public abstract void update(float delta);
+
+    public abstract Entity clone();
 
     public void draw(SpriteBatch batch) {
         update(Gdx.graphics.getDeltaTime());
@@ -57,5 +62,29 @@ public abstract class Entity {
 
     public float getHeight() {
         return sprite.getHeight();
+    }
+
+    public Texture getTexture() {
+        return this.image;
+    }
+
+    public void resetPosition() {
+        this.setPosition(originalPosition.x, originalPosition.y);
+    }
+
+    public void setOriginalPosition() {
+        originalPosition = new Vector2(position.x, position.y);
+    }
+
+    public Vector2 getOriginalPosition() {
+        return this.originalPosition;
+    }
+
+    public boolean isPlaced() {
+        return this.isPlaced;
+    }
+
+    public void setPlaced(boolean placed) {
+        isPlaced = placed;
     }
 }

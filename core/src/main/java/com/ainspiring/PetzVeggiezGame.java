@@ -3,6 +3,7 @@ package com.ainspiring;
 import org.apache.logging.log4j.Logger;
 
 import com.ainspiring.board.Board;
+import com.ainspiring.entities.Entity;
 import com.ainspiring.entities.Pet;
 import com.ainspiring.entities.Veggie;
 import com.ainspiring.entities.VeggiezBrain;
@@ -39,7 +40,7 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
     private PetHub petHub;
 
     private Vector3 touchPosition;
-    private Pet selectedPet;
+    private Entity selectedPet;
     private boolean dragging;
 
     // public final static float SCALE = 32f;
@@ -91,7 +92,7 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
             // TODO: implement drawing a veggies so they will scale up properly and not cause memory leaks 
             // veggie.draw(batch);
         }
-        for (Pet pet : board.getPetsOnBoard()) {
+        for (Entity pet : board.getPetsOnBoard()) {
             pet.draw(batch);
         }
         if (dragging && selectedPet != null) {
@@ -117,9 +118,9 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
 		
         this.dragging = true;
      
-        for (Pet pet : this.petHub.getAvailablePets()) {
-            if (pet.getBoundingBox().contains(touchPosition.x, touchPosition.y)) {
-                selectedPet = pet.clone();
+        for (Entity entity : this.petHub.getAvailablePets()) {
+            if (entity.getBoundingBox().contains(touchPosition.x, touchPosition.y)) {
+                selectedPet = entity.clone();
                 selectedPet.setOriginalPosition();
                 return true;
             } 

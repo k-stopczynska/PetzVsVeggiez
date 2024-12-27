@@ -5,9 +5,13 @@ import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 
+import com.ainspiring.entities.Entity;
 import com.ainspiring.entities.ManaPet;
 import com.ainspiring.entities.Obstacle;
 import com.ainspiring.entities.Pet;
+import com.ainspiring.utils.prototypes.PetPrototype;
+import com.ainspiring.utils.prototypes.ManaPetPrototype;
+import com.ainspiring.utils.prototypes.Prototype;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -18,7 +22,7 @@ public class PetHub {
 
  private static final Logger LOGGER = LoggerFactory.getLogger(PetHub.class);
 
-    private Array<Pet> availablePets;
+    private Array<Entity> availablePets;
     private ConfigLoader configLoader;
     private Rectangle bounds;
 
@@ -27,7 +31,8 @@ public class PetHub {
         availablePets = new Array<>();
         // TODO: move this to the screen where the player can choose which available pets 
         //he wants to play with and add them to the hub
-        bounds = new Rectangle(370, 600, 150, 50);
+        // TODO2: set bounds dynamically
+        bounds = new Rectangle(370, 600, 800, 50);
         this.configLoader = new ConfigLoader();
         configLoader.loadConfig();
         loadPets();
@@ -36,12 +41,12 @@ public class PetHub {
     public void loadPets() {
         LevelConfig levelConfig = configLoader.getLevelConfig(1);
         if (levelConfig != null && levelConfig.getPetz() != null && !levelConfig.getPetz().isEmpty()) {
-            List<Prototype> petConfig = levelConfig.getPetz();
-            List<Prototype> manaPetConfig = levelConfig.getManaPetz();
+            List<PetPrototype> petConfig = levelConfig.getPetz();
+            List<ManaPetPrototype> manaPetConfig = levelConfig.getManaPetz();
             List<Prototype> obstaclesConfig = levelConfig.getObstacles();
             float x = 400;
             float y = 600;
-            for (Prototype config : petConfig) {
+            for (PetPrototype config : petConfig) {
                 Pet pet = createPetFromConfig(config, x, y);
                 availablePets.add(pet);
                 x += 50;
@@ -60,7 +65,7 @@ public class PetHub {
         }
     }
 
-    private Pet createPetFromConfig(Prototype config, float x, float y) {
+    private Pet createPetFromConfig(PetPrototype config, float x, float y) {
     Vector2 position = new Vector2(x, y);
     Texture image = new Texture(config.getImage());
     Pet pet = new Pet(image, position, config.getHealth(), config.getCost(),
@@ -71,12 +76,12 @@ public class PetHub {
 }
 
     public void render(SpriteBatch batch) {
-        for (Pet pet : availablePets) {
-            pet.draw(batch);
+        for (Entity entity : availablePets) {
+            entity.draw(batch);
         }
     }
 
-    public Array<Pet> getAvailablePets() {
+    public Array<Entity> getAvailablePets() {
         return availablePets;
     }
 

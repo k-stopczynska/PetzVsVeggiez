@@ -3,21 +3,26 @@ package com.ainspiring.utils;
 
 import java.util.List;
 
+import com.ainspiring.utils.prototypes.ManaPetPrototype;
+import com.ainspiring.utils.prototypes.PetPrototype;
+import com.ainspiring.utils.prototypes.Prototype;
+import com.ainspiring.utils.prototypes.VeggiezPrototype;
+
 public class LevelConfig {
-    private List<Prototype> veggiez;
-    private List<Prototype> petz;
-    private List<Prototype> mana_petz;
+    private List<VeggiezPrototype> veggiez;
+    private List<PetPrototype> petz;
+    private List<ManaPetPrototype> mana_petz;
     private List<Prototype> obstacles;
 
-    public List<Prototype> getVeggiez() {
+    public List<VeggiezPrototype> getVeggiez() {
         return veggiez;
     }
 
-    public List<Prototype> getPetz() {
+    public List<PetPrototype> getPetz() {
         return petz;
     }
 
-    public List<Prototype> getManaPetz() {
+    public List<ManaPetPrototype> getManaPetz() {
         return mana_petz;
     }
 
@@ -25,15 +30,15 @@ public class LevelConfig {
         return obstacles;
     }
 
-    public void setVeggiez(List<Prototype> veggiez) {
+    public void setVeggiez(List<VeggiezPrototype> veggiez) {
         this.veggiez = veggiez;
     }
 
-    public void setPetz(List<Prototype> petz) {
+    public void setPetz(List<PetPrototype> petz) {
         this.petz = petz;
     }
 
-    public void setManaPetz(List<Prototype> mana_petz) {
+    public void setManaPetz(List<ManaPetPrototype> mana_petz) {
         this.mana_petz = mana_petz;
     }
     

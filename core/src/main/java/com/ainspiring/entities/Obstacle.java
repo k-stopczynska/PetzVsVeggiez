@@ -13,4 +13,13 @@ public class Obstacle extends Entity {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
+
+        public Obstacle clone() {
+        return new Obstacle(
+            new Texture(this.image.getTextureData()),
+            new Vector2(this.position.x, this.position.y),
+            this.health,
+            this.cost
+        );
+    }
 }

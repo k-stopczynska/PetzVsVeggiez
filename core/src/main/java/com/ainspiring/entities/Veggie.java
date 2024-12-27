@@ -20,6 +20,11 @@ public class Veggie extends FightingEntity {
         }
     }
 
+    @Override
+    public Veggie clone() {
+        return new Veggie(image, position, health, cost, damage, speed);
+    }
+
     public Vector2 getPosition() {
         return position;
     }

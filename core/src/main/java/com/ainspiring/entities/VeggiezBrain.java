@@ -5,7 +5,7 @@ import com.ainspiring.board.Board;
 import com.ainspiring.utils.ConfigLoader;
 import com.ainspiring.utils.LevelConfig;
 import com.ainspiring.utils.LoggerFactory;
-import com.ainspiring.utils.Prototype;
+import com.ainspiring.utils.prototypes.VeggiezPrototype;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -55,7 +55,7 @@ public class VeggiezBrain {
         LevelConfig levelConfig = configLoader.getLevelConfig(1);
 
         if (levelConfig != null && levelConfig.getVeggiez() != null && !levelConfig.getVeggiez().isEmpty()) {
-            Prototype veggieConfig = levelConfig.getVeggiez()
+            VeggiezPrototype veggieConfig = levelConfig.getVeggiez()
                     .get(new Random().nextInt(levelConfig.getVeggiez().size()));
 
             Texture image = new Texture(veggieConfig.getImage());
