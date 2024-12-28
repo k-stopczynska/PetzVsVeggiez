@@ -4,7 +4,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.ainspiring.board.Board;
 import com.ainspiring.entities.Entity;
-import com.ainspiring.entities.Pet;
+import com.ainspiring.entities.ManaPet;
 import com.ainspiring.entities.Veggie;
 import com.ainspiring.entities.VeggiezBrain;
 import com.ainspiring.utils.LoggerFactory;
@@ -14,9 +14,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -30,11 +30,10 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
 
     private Viewport viewport;
     private OrthographicCamera camera;
-    private ShapeRenderer shapes;
 
     private SpriteBatch batch;
-    private Sprite sprite;
 
+    private Player player;
     private Board board;
     private VeggiezBrain veggiezBrain;
     private PetHub petHub;
@@ -55,6 +54,7 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
         batch = new SpriteBatch();
         veggiezBrain = new VeggiezBrain(board);
         petHub = new PetHub();
+        player = new Player();
 
         camera = new OrthographicCamera();
         int screenWidth = Gdx.graphics.getWidth();
@@ -67,17 +67,12 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
  
         touchPosition = new Vector3();
 
-        shapes = new ShapeRenderer();
 		Gdx.input.setInputProcessor(this);
     }
 
     @Override
     public void render() {
         ScreenUtils.clear(0.04f, 2.54f, 0.44f, 1f);
-        shapes.setProjectionMatrix(camera.combined);
-        shapes.begin(ShapeRenderer.ShapeType.Filled);
-        shapes.circle(touchPosition.x, touchPosition.y, 0.25f, 16);
-        shapes.end();
         board.render();
 
         float delta = Gdx.graphics.getDeltaTime();
@@ -89,16 +84,30 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
         petHub.render(batch);
         for (Veggie veggie : veggiezBrain.getVeggies()) {
             batch.draw(veggie.getImage(), veggie.getPosition().x, veggie.getPosition().y);
-            // TODO: implement drawing a veggies so they will scale up properly and not cause memory leaks 
+            // TODO: implement drawing veggies so they will scale up properly and not cause memory leaks 
             // veggie.draw(batch);
         }
         for (Entity pet : board.getPetsOnBoard()) {
             pet.draw(batch);
+            if (pet instanceof ManaPet) {
+                ManaPet manaPet = (ManaPet) pet;
+                if (manaPet.getHasGeneratedMana())
+                    spawnManaStar(manaPet);
+            }
         }
         if (dragging && selectedPet != null) {
             selectedPet.draw(batch);
         }
         batch.end();
+    }
+
+    protected void spawnManaStar(ManaPet manaPet) {
+        Texture starImage = new Texture("star.png");
+        Sprite star = new Sprite(starImage);
+        Vector2 starPosition = new Vector2(manaPet.getPosition().x, manaPet.getPosition().y + 20);
+        star.setPosition(starPosition.x, starPosition.y);
+        manaPet.setStarBoundingBox(starPosition, star);
+        star.draw(batch);
     }
     
     @Override
@@ -113,8 +122,8 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
             return false;
         touchPosition.set(screenX, screenY, 0);
         camera.unproject(touchPosition);
-        if (!petHub.isWithinBounds(touchPosition.x, touchPosition.y))
-            return false;
+        // if (!petHub.isWithinBounds(touchPosition.x, touchPosition.y))
+        //     return false;
 		
         this.dragging = true;
      
@@ -123,7 +132,17 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
                 selectedPet = entity.clone();
                 selectedPet.setOriginalPosition();
                 return true;
-            } 
+            }
+        }
+        
+        for (Entity entity : board.getPetsOnBoard()) {
+            if (entity instanceof ManaPet) {
+                ManaPet manaPet = (ManaPet) entity;
+                if (manaPet.isWithinBounds(touchPosition.x, touchPosition.y)) {
+                    manaPet.setHasGeneratedMana();
+                    player.gatherMana(manaPet.getMana());
+                }
+            }
         }
         return true;
 	}
@@ -196,7 +215,6 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
 
     @Override
     public void dispose() {
-        sprite.getTexture().dispose();
         batch.dispose();
         board.dispose();
     }

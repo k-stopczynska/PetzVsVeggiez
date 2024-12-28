@@ -1,15 +1,14 @@
 package com.ainspiring;
 
-import java.util.ArrayList;
 
-import com.ainspiring.entities.Pet;
+import com.ainspiring.entities.Entity;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 
 public class Player {
     protected String name;
     protected int level = 0;
     protected int gatheredMana = 30;
-    protected List<Pet> pets;
+    protected List<Entity> pets;
 
     public void choosePetz() {
     // TODO: implement click event and touch event listener to add chosen pet to a list in the right phase
