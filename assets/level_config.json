@@ -3,6 +3,7 @@
 		"1": {
 			"veggiez": [
 				{
+					"name": "BROCCOLI",
 					"image": "Broccoli.png",
 					"health": 100,
 					"cost": 0,
@@ -10,6 +11,7 @@
 					"damage": 10
 				},
 				{
+					"name": "CELERY",
 					"image": "Celery.png",
 					"health": 80,
 					"cost": 0,
@@ -17,6 +19,7 @@
 					"damage": 8
 				},
 				{
+					"name": "CARROT",
 					"image": "Carrot.png",
 					"health": 90,
 					"cost": 0,
@@ -24,6 +27,7 @@
 					"damage": 12
 				},
 				{
+					"name": "TOMATO",
 					"image": "Tomato.png",
 					"health": 100,
 					"cost": 0,
@@ -31,6 +35,7 @@
 					"damage": 9
 				},
 				{
+					"name": "SQUASH",
 					"image": "Squash.png",
 					"health": 80,
 					"cost": 0,
@@ -38,6 +43,7 @@
 					"damage": 3
 				},
 				{
+					"name": "EGGPLANT",
 					"image": "Eggplant.png",
 					"health": 40,
 					"cost": 0,
@@ -47,68 +53,77 @@
 			],
 			"petz": [
 				{
+					"name": "CLAWSTRIKE",
 					"image": "cat_1.png",
 					"health": 100,
-					"cost": 0,
+					"cost": 45,
 					"speed": 2,
 					"damage": 10
 				},
 				{
+					"name": "SHADOWPAW",
 					"image": "cat_2.png",
 					"health": 80,
-					"cost": 0,
+					"cost": 100,
 					"speed": 3,
 					"damage": 8
 				},
 				{
+					"name": "PURRLOCK",
 					"image": "cat_3.png",
 					"health": 90,
-					"cost": 0,
+					"cost": 120,
 					"speed": 1,
 					"damage": 12
 				},
 				{
+					"name": "BARKASHI",
 					"image": "dog_1.png",
 					"health": 90,
-					"cost": 0,
+					"cost": 65,
 					"speed": 1,
 					"damage": 12
 				},
 				{
+					"name": "FANGCHU",
 					"image": "dog_2.png",
 					"health": 90,
-					"cost": 0,
+					"cost": 90,
 					"speed": 1,
 					"damage": 12
 				},
 				{
+					"name": "HOWLSTORM",
 					"image": "dog_3.png",
 					"health": 90,
-					"cost": 0,
+					"cost": 150,
 					"speed": 1,
 					"damage": 12
 				}
 			],
 			"mana_petz": [
 				{
+					"name": "MEOWSTER",
 					"image": "mana_cat_1.png",
 					"health": 100,
-					"cost": 0,
-					"mana": 2,
+					"cost": 30,
+					"mana": 20,
 					"interval": 10
 				}
 			],
 			"obstacles": [
 				{
+					"name": "TRASHCAN",
 					"image": "trash_can.png",
 					"health": 100,
-					"cost": 0
+					"cost": 15
 				}
 			]
 		},
 		"2": {
 			"veggiez": [
 				{
+					"name": "PARSNIP",
 					"image": "Parsnip.png",
 					"health": 100,
 					"cost": 0,
@@ -116,6 +131,7 @@
 					"damage": 10
 				},
 				{
+					"name": "RADISH",
 					"image": "Radish.png",
 					"health": 80,
 					"cost": 0,
@@ -123,6 +139,7 @@
 					"damage": 8
 				},
 				{
+					"name": "RED ONION",
 					"image": "RedOnion.png",
 					"health": 90,
 					"cost": 0,
@@ -130,6 +147,7 @@
 					"damage": 12
 				},
 				{
+					"name": "CHILLI",
 					"image": "HotPepper.png",
 					"health": 100,
 					"cost": 0,
@@ -137,6 +155,7 @@
 					"damage": 10
 				},
 				{
+					"name": "CORN",
 					"image": "Corn.png",
 					"health": 80,
 					"cost": 0,
@@ -144,6 +163,7 @@
 					"damage": 8
 				},
 				{
+					"name": "RED CABBAGE",
 					"image": "RedCabbage.png",
 					"health": 90,
 					"cost": 0,
@@ -153,117 +173,70 @@
 			],
 			"petz": [
 				{
+					"name": "MEOWSTICK",
 					"image": "cat_4.png",
 					"health": 100,
-					"cost": 0,
+					"cost": 75,
 					"speed": 2,
 					"damage": 10
 				},
 				{
+					"name": "SHURIKITTY",
 					"image": "cat_5.png",
 					"health": 80,
-					"cost": 0,
+					"cost": 165,
 					"speed": 3,
 					"damage": 8
 				},
 				{
+					"name": "POUNCEBLADE",
 					"image": "cat_6.png",
 					"health": 90,
-					"cost": 0,
+					"cost": 135,
 					"speed": 1,
 					"damage": 12
 				},
 				{
+					"name": "BARKURAI",
 					"image": "dog_4.png",
 					"health": 100,
-					"cost": 0,
+					"cost": 185,
 					"speed": 2,
 					"damage": 10
 				},
 				{
+					"name": "DOJOG",
 					"image": "dog_5.png",
 					"health": 80,
-					"cost": 0,
+					"cost": 250,
 					"speed": 3,
 					"damage": 8
 				},
 				{
+					"name": "CHOMPITSU",
 					"image": "dog_6.png",
 					"health": 90,
-					"cost": 0,
+					"cost": 300,
 					"speed": 1,
 					"damage": 12
 				}
 			],
 			"mana_petz": [
 				{
+					"name": "MEOWSTER",
 					"image": "mana_cat_2.png",
 					"health": 100,
-					"cost": 0,
+					"cost": 30,
 					"mana": 2,
 					"interval": 10
 				}
 			],
 			"obstacles": [
 				{
+					"name": "CONE",
 					"image": "cone.png",
 					"health": 100,
-					"cost": 0
-				}
-			]
-		},
-		"3": {
-			"veggiez": [
-				{
-					"image": "Corn.png",
-					"health": 100,
-					"cost": 0,
-					"speed": 2,
-					"damage": 10
-				},
-				{
-					"image": "Mushroom.png",
-					"health": 80,
-					"cost": 0,
-					"speed": 3,
-					"damage": 8
-				},
-				{
-					"image": "Leek.png",
-					"health": 90,
-					"cost": 0,
-					"speed": 1,
-					"damage": 12
-				}
-			],
-			"petz": [
-				{
-					"image": "Corn.png",
-					"health": 100,
-					"cost": 0,
-					"speed": 2,
-					"damage": 10
-				},
-				{
-					"image": "Mushroom.png",
-					"health": 80,
-					"cost": 0,
-					"speed": 3,
-					"damage": 8
-				},
-				{
-					"image": "Peas.png",
-					"health": 90,
-					"cost": 0,
-					"speed": 1,
-					"damage": 12
-				}
-			],
-			"obstacles": [
-				{
-					"image": "Potato.png",
-					"health": 100,
-					"cost": 0
+					"cost": 20
 				}
 			]
 		}

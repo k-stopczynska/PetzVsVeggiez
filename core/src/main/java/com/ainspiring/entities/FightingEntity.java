@@ -16,8 +16,8 @@ public abstract class FightingEntity extends Entity {
     protected Animation<TextureRegion> hurtAnimation;
     protected Animation<TextureRegion> dieAnimation;
 
-    public FightingEntity(Texture image, Vector2 position, int health, int cost, int damage, float speed) {
-        super(image, position, health, cost);
+    public FightingEntity(String name, Texture image, Vector2 position, int health, int cost, int damage, float speed) {
+        super(name, image, position, health, cost);
         this.damage = damage;
         this.speed = speed;
     }

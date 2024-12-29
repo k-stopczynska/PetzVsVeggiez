@@ -19,8 +19,8 @@ public class ManaPet extends Entity {
     private boolean hasGeneratedMana = false;
     private Rectangle starBoundingBox;
     
-    public ManaPet(Texture image, Vector2 position, int health, int cost, int mana, float interval) {
-        super(image, position, health, cost);
+    public ManaPet(String name, Texture image, Vector2 position, int health, int cost, int mana, float interval) {
+        super(name, image, position, health, cost);
         this.mana = mana;
         this.interval = interval;
         starBoundingBox = new Rectangle(position.x, position.y, sprite.getWidth(), sprite.getHeight());
@@ -68,6 +68,7 @@ public class ManaPet extends Entity {
     
     public ManaPet clone() {
         return new ManaPet(
+            this.name,
             new Texture(this.image.getTextureData()),
             new Vector2(this.position.x, this.position.y),
             this.health,

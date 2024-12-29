@@ -87,7 +87,7 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
         batch.begin();
         renderGatheredMana();
 
-        petHub.render(batch);
+        petHub.render(batch, font);
         for (Veggie veggie : veggiezBrain.getVeggies()) {
             batch.draw(veggie.getImage(), veggie.getPosition().x, veggie.getPosition().y);
             // TODO: implement drawing veggies so they will scale up properly and not cause memory leaks 
@@ -138,7 +138,9 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
         this.dragging = true;
      
         for (Entity entity : this.petHub.getAvailablePets()) {
-            if (entity.getBoundingBox().contains(touchPosition.x, touchPosition.y)) {
+            if (entity.getBoundingBox().contains(touchPosition.x, touchPosition.y)
+                    && Integer.valueOf(String.valueOf(player.getGatheredMana())) >= entity.getCost()) {
+                player.spendMana(entity.getCost());
                 selectedPet = entity.clone();
                 selectedPet.setOriginalPosition();
                 return true;

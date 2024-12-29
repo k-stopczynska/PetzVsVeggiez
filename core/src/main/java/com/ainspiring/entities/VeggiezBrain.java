@@ -59,7 +59,7 @@ public class VeggiezBrain {
                     .get(new Random().nextInt(levelConfig.getVeggiez().size()));
 
             Texture image = new Texture(veggieConfig.getImage());
-            Veggie veggie = new Veggie(image, position, veggieConfig.getHealth(), veggieConfig.getCost(), 
+            Veggie veggie = new Veggie(veggieConfig.getName(), image, position, veggieConfig.getHealth(), veggieConfig.getCost(), 
                     veggieConfig.getDamage(), veggieConfig.getSpeed());
             veggies.add(veggie);
         }

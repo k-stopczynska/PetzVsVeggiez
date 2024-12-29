@@ -12,7 +12,9 @@ import com.ainspiring.entities.Pet;
 import com.ainspiring.utils.prototypes.PetPrototype;
 import com.ainspiring.utils.prototypes.ManaPetPrototype;
 import com.ainspiring.utils.prototypes.Prototype;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -50,17 +52,17 @@ public class PetHub {
             for (ManaPetPrototype config : manaPetConfig) {
                 ManaPet manaPet = createManaPetFromConfig(config, x, y);
                 availablePets.add(manaPet);
-                x += 50;
+                x += 100;
             }
             for (PetPrototype config : petConfig) {
                 Pet pet = createPetFromConfig(config, x, y);
                 availablePets.add(pet);
-                x += 50;
+                x += 100;
             }
             for (Prototype config : obstaclesConfig) {
                 Obstacle obstacle = createObstacleFromConfig(config, x, y);
                 availablePets.add(obstacle);
-                x += 50;
+                x += 100;
             }
         }
     }
@@ -68,7 +70,7 @@ public class PetHub {
     private Pet createPetFromConfig(PetPrototype config, float x, float y) {
         Vector2 position = new Vector2(x, y);
         Texture image = new Texture(config.getImage());
-        Pet pet = new Pet(image, position, config.getHealth(), config.getCost(),
+        Pet pet = new Pet(config.getName(), image, position, config.getHealth(), config.getCost(),
                 config.getDamage(), config.getSpeed());
         pet.setPosition(x, y);
         pet.setOriginalPosition();
@@ -78,7 +80,7 @@ public class PetHub {
     private ManaPet createManaPetFromConfig(ManaPetPrototype config, float x, float y) {
         Vector2 position = new Vector2(x, y);
         Texture image = new Texture(config.getImage());
-        ManaPet manaPet = new ManaPet(image, position, config.getHealth(), config.getCost(),
+        ManaPet manaPet = new ManaPet(config.getName(), image, position, config.getHealth(), config.getCost(),
                 config.getMana(), config.getInterval());
         manaPet.setPosition(x, y);
         manaPet.setOriginalPosition();
@@ -88,15 +90,21 @@ public class PetHub {
     private Obstacle createObstacleFromConfig(Prototype config, float x, float y) {
     Vector2 position = new Vector2(x, y);
     Texture image = new Texture(config.getImage());
-    Obstacle obstacle = new Obstacle(image, position, config.getHealth(), config.getCost());
+    Obstacle obstacle = new Obstacle(config.getName(), image, position, config.getHealth(), config.getCost());
     obstacle.setPosition(x, y);
     obstacle.setOriginalPosition();
     return obstacle;
 }
 
-    public void render(SpriteBatch batch) {
+    public void render(SpriteBatch batch, BitmapFont font) {
         for (Entity entity : availablePets) {
             entity.draw(batch);
+            font.setColor(Color.BLACK);
+            font.getData().setScale(1.0f);
+            font.draw(batch, (CharSequence) String.valueOf(entity.getCost()),
+                    entity.getPosition().x + entity.getWidth() / 2, entity.getPosition().y - 40);
+            font.getData().setScale(0.8f);
+            font.draw(batch, (CharSequence) String.valueOf(entity.getName()),entity.getPosition().x - entity.getWidth()/2, entity.getPosition().y - 20); 
         }
     }
 

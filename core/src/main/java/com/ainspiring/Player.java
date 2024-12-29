@@ -35,6 +35,10 @@ public class Player {
         this.gatheredMana += mana;
     }
 
+    public void spendMana(int mana) {
+        this.gatheredMana -= mana;
+    }
+
     public CharSequence getGatheredMana() {
         return (CharSequence)String.valueOf(this.gatheredMana);
     }

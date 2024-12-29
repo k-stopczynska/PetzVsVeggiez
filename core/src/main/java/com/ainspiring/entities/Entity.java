@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class Entity {
+    protected String name;
     protected int health;
     protected int cost;
     protected Sprite sprite;
@@ -17,7 +18,8 @@ public abstract class Entity {
     private Vector2 originalPosition;
     private boolean isPlaced;
 
-    public Entity(Texture image, Vector2 position, int health, int cost) {
+    public Entity(String name, Texture image, Vector2 position, int health, int cost) {
+        this.name = name;
         this.image = image;
         this.health = health;
         this.cost = cost;
@@ -86,5 +88,13 @@ public abstract class Entity {
 
     public void setPlaced(boolean placed) {
         isPlaced = placed;
+    }
+
+    public int getCost() {
+        return this.cost;
+    }
+
+    public String getName() {
+        return this.name;
     }
 }

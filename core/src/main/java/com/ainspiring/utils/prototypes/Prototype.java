@@ -2,10 +2,19 @@ package com.ainspiring.utils.prototypes;
 
 public class Prototype {
     public Prototype() {}
-     
+
+        public String name;
         public String image;
         public int health;
         public int cost;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String image) {
+        this.name = name;
+    }
 
     public String getImage() {
         return image;

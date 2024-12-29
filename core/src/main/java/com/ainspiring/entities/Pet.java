@@ -6,8 +6,8 @@ import com.badlogic.gdx.math.Vector2;
 public class Pet extends FightingEntity {
     protected float elapsedTime = 0;
 
-    public Pet(Texture image, Vector2 position, int health, int cost, int damage, float speed) {
-        super(image, position, health, cost, damage, speed);
+    public Pet(String name, Texture image, Vector2 position, int health, int cost, int damage, float speed) {
+        super(name , image, position, health, cost, damage, speed);
     }
 
     @Override
@@ -20,6 +20,7 @@ public class Pet extends FightingEntity {
 
     public Pet clone() {
         return new Pet(
+            this.name, 
             new Texture(this.image.getTextureData()),
             new Vector2(this.position.x, this.position.y),
             this.health,
