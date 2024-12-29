@@ -13,8 +13,10 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -32,6 +34,7 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
     private OrthographicCamera camera;
 
     private SpriteBatch batch;
+    private BitmapFont font;
 
     private Player player;
     private Board board;
@@ -52,6 +55,7 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
         // setScreen(new FirstScreen());       
         board = new Board(); 
         batch = new SpriteBatch();
+        font = new BitmapFont();
         veggiezBrain = new VeggiezBrain(board);
         petHub = new PetHub();
         player = new Player();
@@ -81,6 +85,8 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
             veggiezBrain.startWave();
         }
         batch.begin();
+        renderGatheredMana();
+
         petHub.render(batch);
         for (Veggie veggie : veggiezBrain.getVeggies()) {
             batch.draw(veggie.getImage(), veggie.getPosition().x, veggie.getPosition().y);
@@ -104,10 +110,16 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
     protected void spawnManaStar(ManaPet manaPet) {
         Texture starImage = new Texture("star.png");
         Sprite star = new Sprite(starImage);
-        Vector2 starPosition = new Vector2(manaPet.getPosition().x, manaPet.getPosition().y + 20);
+        Vector2 starPosition = new Vector2(manaPet.getPosition().x, manaPet.getPosition().y + 30);
         star.setPosition(starPosition.x, starPosition.y);
         manaPet.setStarBoundingBox(starPosition, star);
         star.draw(batch);
+    }
+
+    protected void renderGatheredMana() {
+        font.setColor(Color.BLACK);
+        font.getData().setScale(3.0f);
+        font.draw(batch, player.getGatheredMana(), 300, 650);
     }
     
     @Override
@@ -122,8 +134,6 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
             return false;
         touchPosition.set(screenX, screenY, 0);
         camera.unproject(touchPosition);
-        // if (!petHub.isWithinBounds(touchPosition.x, touchPosition.y))
-        //     return false;
 		
         this.dragging = true;
      
@@ -141,6 +151,7 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
                 if (manaPet.isWithinBounds(touchPosition.x, touchPosition.y)) {
                     manaPet.setHasGeneratedMana();
                     player.gatherMana(manaPet.getMana());
+                    LOGGER.info("Gathered mana: " + player.getGatheredMana());
                 }
             }
         }
@@ -216,6 +227,7 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
     @Override
     public void dispose() {
         batch.dispose();
+        font.dispose();
         board.dispose();
     }
 }

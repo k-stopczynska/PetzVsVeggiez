@@ -46,14 +46,15 @@ public class PetHub {
             List<Prototype> obstaclesConfig = levelConfig.getObstacles();
             float x = 400;
             float y = 600;
-            for (PetPrototype config : petConfig) {
-                Pet pet = createPetFromConfig(config, x, y);
-                availablePets.add(pet);
-                x += 50;
-            }
+
             for (ManaPetPrototype config : manaPetConfig) {
                 ManaPet manaPet = createManaPetFromConfig(config, x, y);
                 availablePets.add(manaPet);
+                x += 50;
+            }
+            for (PetPrototype config : petConfig) {
+                Pet pet = createPetFromConfig(config, x, y);
+                availablePets.add(pet);
                 x += 50;
             }
             for (Prototype config : obstaclesConfig) {
