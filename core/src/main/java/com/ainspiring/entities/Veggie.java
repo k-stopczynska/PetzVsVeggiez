@@ -16,6 +16,7 @@ public class Veggie extends FightingEntity {
             elapsedTime += delta;
             if (position.x > 0) {
                 position.x -= this.speed;
+                setPosition(position.x, position.y);
             }
         }
     }

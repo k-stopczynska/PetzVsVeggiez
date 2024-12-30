@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import com.ainspiring.board.Board;
 import com.ainspiring.entities.Entity;
 import com.ainspiring.entities.ManaPet;
+import com.ainspiring.entities.Pet;
 import com.ainspiring.entities.Veggie;
 import com.ainspiring.entities.VeggiezBrain;
 import com.ainspiring.utils.LoggerFactory;
@@ -86,7 +87,7 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
         }
         batch.begin();
         renderGatheredMana();
-
+        
         petHub.render(batch, font);
         for (Veggie veggie : veggiezBrain.getVeggies()) {
             batch.draw(veggie.getImage(), veggie.getPosition().x, veggie.getPosition().y);
@@ -95,6 +96,11 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
         }
         for (Entity pet : board.getPetsOnBoard()) {
             pet.draw(batch);
+            if (pet instanceof Pet) {
+
+                ((Pet) pet).checkCollisions(((Pet) pet).getFireballs(), veggiezBrain.getVeggies());
+            }
+            
             if (pet instanceof ManaPet) {
                 ManaPet manaPet = (ManaPet) pet;
                 if (manaPet.getHasGeneratedMana())

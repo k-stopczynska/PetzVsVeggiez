@@ -42,6 +42,9 @@ public abstract class Entity {
 
     public void takeDamage(int damage) {
         this.health -= damage;
+        if (this.health <= 0) {
+            this.position.y = 2000; 
+        }
     }
 
     public void setPosition(float x, float y) {
@@ -96,5 +99,9 @@ public abstract class Entity {
 
     public String getName() {
         return this.name;
+    }
+
+    public void dispose() {
+        image.dispose();
     }
 }

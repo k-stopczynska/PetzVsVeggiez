@@ -22,10 +22,6 @@ public abstract class FightingEntity extends Entity {
         this.speed = speed;
     }
 
-    public void attack(Entity target) {
-        target.health -= this.damage;
-    }
-
     @Override
     public void update(float delta) {
         throw new UnsupportedOperationException("Unimplemented method 'update'");
