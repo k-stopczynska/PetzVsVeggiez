@@ -3,16 +3,16 @@ package com.ainspiring.utils.prototypes;
 public class PetPrototype extends Prototype {
     public PetPrototype() {
     }
-    
-        public int speed;
+
+        public float speed;
         public int damage;
 
 
-    public int getSpeed() {
+    public float getSpeed() {
         return speed;
     }
 
-    public void setSpeed(int speed) {
+    public void setSpeed(float speed) {
         this.speed = speed;
     }
 
