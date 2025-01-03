@@ -1,5 +1,9 @@
 package com.ainspiring;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.logging.log4j.Logger;
 
 import com.ainspiring.board.Board;
@@ -77,7 +81,7 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
 
     @Override
     public void render() {
-        ScreenUtils.clear(0.04f, 2.54f, 0.44f, 1f);
+        ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1f);
         board.render();
 
         float delta = Gdx.graphics.getDeltaTime();
@@ -91,6 +95,8 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
         petHub.render(batch, font);
         for (Veggie veggie : veggiezBrain.getVeggies()) {
             batch.draw(veggie.getImage(), veggie.getPosition().x, veggie.getPosition().y);
+            veggie.checkCollisions(board.getPetsOnBoard(), veggiezBrain.getVeggies());
+            board.getPetsOnBoard().removeIf(pet -> pet.getHealth() <= 0);
             // TODO: implement drawing veggies so they will scale up properly and not cause memory leaks 
             // veggie.draw(batch);
         }
@@ -99,6 +105,8 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
             if (pet instanceof Pet) {
 
                 ((Pet) pet).checkCollisions(((Pet) pet).getFireballs(), veggiezBrain.getVeggies());
+                ((Pet) pet).getFireballs().removeIf(fireball -> !fireball.isActive());
+                veggiezBrain.getVeggies().removeIf(veggie -> veggie.getHealth() <= 0);
             }
             
             if (pet instanceof ManaPet) {
@@ -123,7 +131,7 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
     }
 
     protected void renderGatheredMana() {
-        font.setColor(Color.BLACK);
+        font.setColor(Color.WHITE);
         font.getData().setScale(3.0f);
         font.draw(batch, player.getGatheredMana(), 300, 650);
     }
@@ -146,7 +154,6 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
         for (Entity entity : this.petHub.getAvailablePets()) {
             if (entity.getBoundingBox().contains(touchPosition.x, touchPosition.y)
                     && Integer.valueOf(String.valueOf(player.getGatheredMana())) >= entity.getCost()) {
-                player.spendMana(entity.getCost());
                 selectedPet = entity.clone();
                 selectedPet.setOriginalPosition();
                 return true;
@@ -186,6 +193,7 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
     Vector2 position = new Vector2(worldCoords.x, worldCoords.y);
 
     board.placePet(selectedPet, position);
+    if (selectedPet.isPlaced()) player.spendMana(selectedPet.getCost());
     dragging = false;
     selectedPet = null;
     return true;

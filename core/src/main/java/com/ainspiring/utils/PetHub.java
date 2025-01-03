@@ -99,7 +99,7 @@ public class PetHub {
     public void render(SpriteBatch batch, BitmapFont font) {
         for (Entity entity : availablePets) {
             entity.draw(batch);
-            font.setColor(Color.BLACK);
+            font.setColor(Color.WHITE);
             font.getData().setScale(1.0f);
             font.draw(batch, (CharSequence) String.valueOf(entity.getCost()),
                     entity.getPosition().x + entity.getWidth() / 2, entity.getPosition().y - 40);

@@ -50,4 +50,8 @@ public abstract class FightingEntity extends Entity {
     public void setDieAnimation(Animation<TextureRegion> animation) {
         this.dieAnimation = animation;
     }
+
+    public int getDamage() {
+        return this.damage;
+    }
 }

@@ -39,7 +39,7 @@ public class Fireball {
         this.velocity = velocity;
         this.isActive = true;
         this.damage = damage;
-        this.boundingBox = new Rectangle(position.x, position.y, 160, 32);
+        this.boundingBox = new Rectangle(position.x, position.y, fireball1.getWidth(), fireball1.getHeight());
     }
 
     public void update(float delta) {
@@ -47,6 +47,7 @@ public class Fireball {
             return;
         stateTime += delta;
         position.add(velocity.x * delta, velocity.y * delta);
+        setPosition(position.x, position.y);
 
         if (position.x > 1280 || position.y > 720) {
             isActive = false;
@@ -79,8 +80,8 @@ public class Fireball {
     }
 
     public void setPosition(float x, float y) {
-        this.position.x = x;
-        this.position.y = y;
+        this.position.set(x, y);
+        boundingBox.set(x, y, fireball1.getWidth(), fireball1.getHeight());
     }
 }
 

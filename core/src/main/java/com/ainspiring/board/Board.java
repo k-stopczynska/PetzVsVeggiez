@@ -1,5 +1,8 @@
 package com.ainspiring.board;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.logging.log4j.Logger;
 
 import com.ainspiring.entities.Entity;
@@ -19,7 +22,7 @@ public class Board {
     private final int CELL_HEIGHT = 64;
     private Cell[][] boardGrid;
     private ShapeRenderer shapeRenderer;
-    private Array<Entity> petsOnBoard;
+    private List<Entity> petsOnBoard;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Board.class);
 
@@ -27,12 +30,12 @@ public class Board {
         boardGrid = new Cell[ROWS][COLS];
         initializeGrid();
         shapeRenderer = new ShapeRenderer();
-        petsOnBoard = new Array<>();
+        petsOnBoard = new ArrayList<Entity>();
     }
 
     public void render() {
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(Color.BLACK);
+        shapeRenderer.setColor(Color.WHITE);
         for (int row = 0; row < ROWS; row++) {
             for (int col = 0; col < COLS; col++) {
                 shapeRenderer.rect( getOffsetX() + col * CELL_WIDTH, 
@@ -99,7 +102,7 @@ public class Board {
         return new Vector2(col, row);
     }
 
-    public Array<Entity> getPetsOnBoard() {
+    public List<Entity> getPetsOnBoard() {
     return petsOnBoard;
 }
 

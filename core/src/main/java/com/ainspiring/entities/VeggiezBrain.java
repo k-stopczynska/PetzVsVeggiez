@@ -11,14 +11,16 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import java.util.Random;
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 
 public class VeggiezBrain {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(VeggiezBrain.class);
-    private Array<Veggie> veggies;
+    private List<Veggie> veggies;
     private float elapsedTime;
     private float spawnInterval;
     private float waveDuration;
@@ -27,9 +29,9 @@ public class VeggiezBrain {
     private ConfigLoader configLoader;
 
     public VeggiezBrain(Board board) {
-        this.veggies = new Array<>();
+        this.veggies = new ArrayList<Veggie>();
         this.elapsedTime = 0;
-        this.spawnInterval = 5f; 
+        this.spawnInterval = 30f; 
         this.waveDuration = 180f;
         this.board = board;
         this.configLoader = new ConfigLoader();
@@ -78,14 +80,14 @@ public class VeggiezBrain {
     }
     
     private void spawnVeggieWave() {
-        int veggieCount = (int) (Math.random() * 4) + 1;
+        int veggieCount = (int) (Math.random() * 3) + 1;
         Set<Integer> usedRows = new HashSet<>();
         for (int i = 0; i < veggieCount; i++) {
             spawnVeggie(usedRows);
         }
     }
 
-    public Array<Veggie> getVeggies() {
+    public List<Veggie> getVeggies() {
         return veggies;
     }
 

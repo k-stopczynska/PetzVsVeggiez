@@ -1,5 +1,8 @@
 package com.ainspiring.entities;
 
+import org.apache.logging.log4j.Logger;
+
+import com.ainspiring.utils.LoggerFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -8,6 +11,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class Entity {
+
+private static final Logger LOGGER = LoggerFactory.getLogger(Entity.class);
+
     protected String name;
     protected int health;
     protected int cost;
@@ -43,7 +49,8 @@ public abstract class Entity {
     public void takeDamage(int damage) {
         this.health -= damage;
         if (this.health <= 0) {
-            this.position.y = 2000; 
+            LOGGER.warn("DEAD!!!!");
+            this.setPosition(position.x, 2000); 
         }
     }
 
@@ -99,6 +106,10 @@ public abstract class Entity {
 
     public String getName() {
         return this.name;
+    }
+
+    public int getHealth() {
+        return this.health;
     }
 
     public void dispose() {

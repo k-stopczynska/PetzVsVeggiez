@@ -36,7 +36,6 @@ public class ManaPet extends Entity {
             elapsedTime += delta;
             if (elapsedTime >= this.interval) {
                 elapsedTime = 0f;
-                LOGGER.info("Generated mana: " + this.mana);
                 hasGeneratedMana = true;
             }
         }
