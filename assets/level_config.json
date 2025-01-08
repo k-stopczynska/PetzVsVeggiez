@@ -108,7 +108,7 @@
 					"health": 100,
 					"cost": 30,
 					"mana": 20,
-					"interval": 6
+					"interval": 8
 				}
 			],
 			"obstacles": [

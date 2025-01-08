@@ -31,7 +31,7 @@ public class VeggiezBrain {
     public VeggiezBrain(Board board) {
         this.veggies = new ArrayList<Veggie>();
         this.elapsedTime = 0;
-        this.spawnInterval = 30f; 
+        this.spawnInterval = 25f; 
         this.waveDuration = 180f;
         this.board = board;
         this.configLoader = new ConfigLoader();

@@ -21,7 +21,7 @@ public class Pet extends FightingEntity {
 private static final Logger LOGGER = LoggerFactory.getLogger(Pet.class);
 
     protected float elapsedTime = 0;
-    private static final float FIREBALL_INTERVAL = 5f;
+    private static final float FIREBALL_INTERVAL = 7f;
     private float fireballElapsedTime = 0f;
     private ArrayList<Fireball> fireballs = new ArrayList<>();
     private ShapeRenderer shapeRenderer;
