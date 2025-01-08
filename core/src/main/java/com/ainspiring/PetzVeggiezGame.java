@@ -95,7 +95,7 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
         petHub.render(batch, font);
         for (Veggie veggie : veggiezBrain.getVeggies()) {
             batch.draw(veggie.getImage(), veggie.getPosition().x, veggie.getPosition().y);
-            veggie.checkCollisions(board.getPetsOnBoard(), veggiezBrain.getVeggies());
+            veggie.checkCollisions(board.getPetsOnBoard(), batch);
             board.getPetsOnBoard().removeIf(pet -> pet.getHealth() <= 0);
             // TODO: implement drawing veggies so they will scale up properly and not cause memory leaks 
             // veggie.draw(batch);
