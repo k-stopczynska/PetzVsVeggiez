@@ -2,6 +2,7 @@ package com.ainspiring.entities;
 
 import org.apache.logging.log4j.Logger;
 
+import com.ainspiring.board.Cell;
 import com.ainspiring.utils.LoggerFactory;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -22,7 +23,9 @@ private static final Logger LOGGER = LoggerFactory.getLogger(Entity.class);
     protected Texture image;
     private Rectangle boundingBox;
     private Vector2 originalPosition;
+    private Cell occupiedCell;
     private boolean isPlaced;
+
 
     public Entity(String name, Texture image, Vector2 position, int health, int cost) {
         this.name = name;
@@ -49,7 +52,9 @@ private static final Logger LOGGER = LoggerFactory.getLogger(Entity.class);
     public void takeDamage(int damage) {
         this.health -= damage;
         if (this.health <= 0) {
-            LOGGER.warn("DEAD!!!!");
+            if (occupiedCell != null) {
+                occupiedCell.setIsOccupied(false);
+            }
             this.setPosition(position.x, 2000); 
         }
     }
@@ -62,6 +67,14 @@ private static final Logger LOGGER = LoggerFactory.getLogger(Entity.class);
     
     public Vector2 getPosition() {
         return position;
+    }
+
+    public void setOccupiedCell(Cell cell) {
+        this.occupiedCell = cell;
+    }
+
+    public Cell getOccupiedCell() {
+        return this.occupiedCell;
     }
 
     public Rectangle getBoundingBox() {

@@ -58,12 +58,12 @@
 					"health": 100,
 					"cost": 45,
 					"speed": 2,
-					"damage": 10
+					"damage": 6
 				},
 				{
 					"name": "SHADOWPAW",
 					"image": "cat_2.png",
-					"health": 80,
+					"health": 70,
 					"cost": 100,
 					"speed": 3,
 					"damage": 20
@@ -71,7 +71,7 @@
 				{
 					"name": "PURRLOCK",
 					"image": "cat_3.png",
-					"health": 90,
+					"health": 65,
 					"cost": 120,
 					"speed": 1,
 					"damage": 25
@@ -79,7 +79,7 @@
 				{
 					"name": "BARKASHI",
 					"image": "dog_1.png",
-					"health": 90,
+					"health": 80,
 					"cost": 65,
 					"speed": 1,
 					"damage": 15
@@ -87,7 +87,7 @@
 				{
 					"name": "FANGCHU",
 					"image": "dog_2.png",
-					"health": 90,
+					"health": 70,
 					"cost": 90,
 					"speed": 1,
 					"damage": 17
@@ -95,7 +95,7 @@
 				{
 					"name": "HOWLSTORM",
 					"image": "dog_3.png",
-					"health": 90,
+					"health": 60,
 					"cost": 150,
 					"speed": 1,
 					"damage": 35
@@ -108,7 +108,7 @@
 					"health": 100,
 					"cost": 30,
 					"mana": 20,
-					"interval": 8
+					"interval": 6
 				}
 			],
 			"obstacles": [

@@ -6,15 +6,11 @@ import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 
-import com.ainspiring.board.Board;
 import com.ainspiring.utils.Fireball;
 import com.ainspiring.utils.LoggerFactory;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 
 public class Pet extends FightingEntity {
 
@@ -24,12 +20,10 @@ private static final Logger LOGGER = LoggerFactory.getLogger(Pet.class);
     private static final float FIREBALL_INTERVAL = 7f;
     private float fireballElapsedTime = 0f;
     private ArrayList<Fireball> fireballs = new ArrayList<>();
-    private ShapeRenderer shapeRenderer;
 
 
     public Pet(String name, Texture image, Vector2 position, int health, int cost, int damage, float speed) {
         super(name, image, position, health, cost, damage, speed);
-        this.shapeRenderer = new ShapeRenderer();
     }
 
     @Override
@@ -67,7 +61,6 @@ private static final Logger LOGGER = LoggerFactory.getLogger(Pet.class);
 
             for (Veggie veggie : veggies) {
                 if (fireball.getBoundingBox().overlaps(veggie.getBoundingBox())) {
-                    LOGGER.info("Damage!!! to " + veggie.getName() + ": " + fireball.getDamage());
                     veggie.takeDamage(fireball.getDamage());
                     fireball.setPosition(position.x, 2000);
                     break;

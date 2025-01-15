@@ -11,7 +11,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 
 
 public class Board {
@@ -55,6 +54,10 @@ public class Board {
         }
     }
 
+    public Cell[][] getBoardGrid() {
+    return boardGrid;
+    }
+
     public void placePet(Entity pet, Vector2 position) {
         Vector2 newPosition = getCellForPet(pet);
         int col = (int) newPosition.x;
@@ -79,7 +82,7 @@ public class Board {
         if (isWithinBounds) {
             cell = boardGrid[row][col];
         }
-        return isWithinBounds && !cell.isOccupied;
+        return isWithinBounds && !cell.getIsOccupied();
     }
 
     protected Vector2 centerPet(int col, int row, Entity pet) {
@@ -98,6 +101,10 @@ public class Board {
 
         int col = (int) ((petX - getOffsetX()) / CELL_WIDTH);
         int row = (int) ((petY - getOffsetY()) / CELL_HEIGHT);
+
+        Cell cell = boardGrid[row][col];
+
+        pet.setOccupiedCell(cell);
 
         return new Vector2(col, row);
     }

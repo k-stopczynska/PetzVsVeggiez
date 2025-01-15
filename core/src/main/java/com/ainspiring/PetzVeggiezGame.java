@@ -1,8 +1,5 @@
 package com.ainspiring;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 
@@ -100,7 +97,9 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
             // TODO: implement drawing veggies so they will scale up properly and not cause memory leaks 
             // veggie.draw(batch);
         }
+       
         for (Entity pet : board.getPetsOnBoard()) {
+            
             pet.draw(batch);
             if (pet instanceof Pet) {
 
@@ -108,7 +107,7 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
                 ((Pet) pet).getFireballs().removeIf(fireball -> !fireball.isActive());
                 veggiezBrain.getVeggies().removeIf(veggie -> veggie.getHealth() <= 0);
             }
-            
+
             if (pet instanceof ManaPet) {
                 ManaPet manaPet = (ManaPet) pet;
                 if (manaPet.getHasGeneratedMana())
@@ -166,7 +165,6 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
                 if (manaPet.isWithinBounds(touchPosition.x, touchPosition.y)) {
                     manaPet.setHasGeneratedMana();
                     player.gatherMana(manaPet.getMana());
-                    LOGGER.info("Gathered mana: " + player.getGatheredMana());
                 }
             }
         }

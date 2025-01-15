@@ -52,7 +52,6 @@ public class Veggie extends FightingEntity {
     private void attackPet(Entity petOnBoard, SpriteBatch batch) {
         renderAttack(batch);
         if (attackTimer >= attackCooldown) {
-            LOGGER.info("Veggie punches " + petOnBoard.getName() + " for " + damage + " damage.");
             petOnBoard.takeDamage(this.damage);
             attackTimer = 0;
         }
@@ -61,9 +60,9 @@ public class Veggie extends FightingEntity {
         }
     }
     
-        private void renderAttack(SpriteBatch batch) {
-            batch.draw(rightGloveImage, position.x - rightGloveImage.getWidth() / 4, position.y);
-            batch.draw(leftGloveImage, position.x - leftGloveImage.getWidth() / 2, position.y + 12);
+    private void renderAttack(SpriteBatch batch) {
+        batch.draw(rightGloveImage, position.x - rightGloveImage.getWidth() / 4, position.y);
+        batch.draw(leftGloveImage, position.x - leftGloveImage.getWidth() / 2, position.y + 12);
     }
 
     @Override
