@@ -110,8 +110,16 @@ public class Board {
     }
 
     public List<Entity> getPetsOnBoard() {
-    return petsOnBoard;
-}
+        return petsOnBoard;
+    }
+
+    public void clearPetsOnBoard() {
+        for (Entity entity : petsOnBoard) {
+            entity.setPlaced(false);
+            entity.dispose();
+        }
+        petsOnBoard.clear();
+    }
 
     public int getRowCount() {
         return ROWS;

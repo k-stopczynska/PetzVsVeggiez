@@ -6,6 +6,8 @@ import org.apache.logging.log4j.Logger;
 import com.ainspiring.entities.Entity;
 import com.ainspiring.utils.LoggerFactory;
 import com.ainspiring.utils.PetHub;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.scenes.scene2d.ui.List;
 
 public class Player {
@@ -13,9 +15,30 @@ public class Player {
     private static final Logger LOGGER = LoggerFactory.getLogger(Player.class);
 
     protected String name;
-    protected int level = 0;
+    protected int level = 1;
     protected int gatheredMana = 30;
     protected List<Entity> pets;
+
+    public Player(String name, int level) {
+        this.name = name;
+        this.level = level;
+    }
+
+    public void saveProgress() {
+        Preferences prefs = Gdx.app.getPreferences("PlayerProgress");
+        prefs.putString("playerName", name);
+        prefs.putInteger("playerLevel", level);
+        prefs.flush();
+        LOGGER.info("Saving player's progress: " + prefs.getString("playerName") + ", level: " + prefs.getInteger("playerLevel"));
+    }
+
+    public void loadProgress() {
+        Preferences prefs = Gdx.app.getPreferences("PlayerProgress");
+        this.name = prefs.getString("playerName", "PlayerOne");
+        this.level = prefs.getInteger("playerLevel", 1);
+        LOGGER.info("Loading player's progress: " + prefs.getString("playerName") + ", level: " + prefs.getInteger("playerLevel"));
+    }
+
 
     public void choosePetz() {
         // TODO: implement click event and touch event listener to add chosen pet to a list in the right phase
@@ -25,10 +48,12 @@ public class Player {
         this.level++;
         this.pets.clear();
         this.gatheredMana = 30;
+        this.saveProgress();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void resetLevel() {
+        this.loadProgress();
+        this.gatheredMana = 30;
     }
 
     public void gatherMana(int mana) {
@@ -40,6 +65,22 @@ public class Player {
     }
 
     public CharSequence getGatheredMana() {
-        return (CharSequence)String.valueOf(this.gatheredMana);
+        return (CharSequence) String.valueOf(this.gatheredMana);
+    }
+
+        public String getName() {
+        return name;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 }

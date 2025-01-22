@@ -27,6 +27,7 @@ public class VeggiezBrain {
     private float waveStartTime;
     private Board board;
     private ConfigLoader configLoader;
+    private boolean isWaveActive;
 
     public VeggiezBrain(Board board) {
         this.veggies = new ArrayList<Veggie>();
@@ -36,9 +37,14 @@ public class VeggiezBrain {
         this.board = board;
         this.configLoader = new ConfigLoader();
         configLoader.loadConfig();
+        this.isWaveActive = false;
     }
     
     public void update(float delta) {
+        if (!isWaveActive) {
+            return;
+        }
+
         elapsedTime += delta;
 
         if (elapsedTime - waveStartTime < waveDuration) {
@@ -49,6 +55,8 @@ public class VeggiezBrain {
             for (Veggie veggie : veggies) {
                 veggie.update(delta);
             }
+        } else {
+            stopWave();
         }
     }
 
@@ -92,11 +100,21 @@ public class VeggiezBrain {
     }
 
     public void startWave() {
+        isWaveActive = true;
         waveStartTime = elapsedTime;
         veggies.clear();
     }
 
     public boolean isWaveOver() {
-        return elapsedTime - waveStartTime >= waveDuration;
+        return !isWaveActive || (elapsedTime - waveStartTime >= waveDuration);
     }
-}
+
+    public void stopWave() {
+        isWaveActive = false;
+        elapsedTime = 0;
+        for (Veggie veggie : veggies) {
+            veggie.dispose();
+        }
+        veggies.clear();
+    }
+    }

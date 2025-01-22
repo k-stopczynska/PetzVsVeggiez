@@ -47,6 +47,9 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
     private Entity selectedPet;
     private boolean dragging;
 
+    private boolean isWinner = false;
+    private boolean isLoser = false;
+
     // public final static float SCALE = 32f;
 	// public final static float INV_SCALE = 1.f/SCALE;
 	// public final static float VP_WIDTH = Gdx.graphics.getWidth();
@@ -60,7 +63,8 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
         font = new BitmapFont();
         veggiezBrain = new VeggiezBrain(board);
         petHub = new PetHub();
-        player = new Player();
+        player = new Player("PlayerOne", 1);
+        player.saveProgress();
 
         camera = new OrthographicCamera();
         int screenWidth = Gdx.graphics.getWidth();
@@ -94,6 +98,9 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
             batch.draw(veggie.getImage(), veggie.getPosition().x, veggie.getPosition().y);
             veggie.checkCollisions(board.getPetsOnBoard(), batch);
             board.getPetsOnBoard().removeIf(pet -> pet.getHealth() <= 0);
+            if (veggie.getPosition().x <= board.getOffsetX()) {
+                isLoser = true;
+            }
             // TODO: implement drawing veggies so they will scale up properly and not cause memory leaks 
             // veggie.draw(batch);
         }
@@ -116,6 +123,12 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
         }
         if (dragging && selectedPet != null) {
             selectedPet.draw(batch);
+        }
+
+        if (isLoser) {
+            veggiezBrain.stopWave();
+            player.resetLevel();
+            board.clearPetsOnBoard();
         }
         batch.end();
     }
