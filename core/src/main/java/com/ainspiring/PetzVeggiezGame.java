@@ -91,7 +91,9 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
             veggiezBrain.startWave();
         }
         batch.begin();
+        renderPlayerName();
         renderGatheredMana();
+        renderLevel();
         
         petHub.render(batch, font);
         for (Veggie veggie : veggiezBrain.getVeggies()) {
@@ -146,6 +148,18 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
         font.setColor(Color.WHITE);
         font.getData().setScale(3.0f);
         font.draw(batch, player.getGatheredMana(), 300, 650);
+    }
+
+    protected void renderPlayerName() {
+        font.setColor(Color.WHITE);
+        font.getData().setScale(2.0f);
+        font.draw(batch, player.getName(), 50, 650);
+    }
+
+    protected void renderLevel() {
+        font.setColor(Color.WHITE);
+        font.getData().setScale(2.0f);
+        font.draw(batch, (CharSequence) String.valueOf(player.getLevel()), 250, 650);
     }
     
     @Override

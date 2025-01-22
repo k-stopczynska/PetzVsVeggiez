@@ -40,6 +40,7 @@ public class ManaPet extends Entity {
         }
     }
     
+    
     public void setStarBoundingBox(Vector2 position, Sprite sprite) {
         starBoundingBox = new Rectangle(position.x, position.y, sprite.getWidth(), sprite.getHeight());
     }
