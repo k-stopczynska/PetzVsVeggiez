@@ -11,10 +11,12 @@ import com.ainspiring.entities.Veggie;
 import com.ainspiring.entities.VeggiezBrain;
 import com.ainspiring.utils.LoggerFactory;
 import com.ainspiring.utils.PetHub;
+import com.ainspiring.utils.screens.NewPlayerScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -57,14 +59,18 @@ public class PetzVeggiezGame extends Game implements InputProcessor {
 
     @Override
     public void create() {
-        // setScreen(new FirstScreen());       
+        // setScreen(new FirstScreen()); 
+        setScreen(new NewPlayerScreen(this));      
         board = new Board(); 
         batch = new SpriteBatch();
         font = new BitmapFont();
         veggiezBrain = new VeggiezBrain(board);
         petHub = new PetHub();
-        player = new Player("PlayerOne", 1);
-        player.saveProgress();
+        Preferences prefs = Gdx.app.getPreferences("PlayerProgress");
+        String name = prefs.getString("playerName", "PlayerOne");
+        int level = prefs.getInteger("playerLevel", 1);
+        player = new Player(name, level);
+        // player.saveProgress();
 
         camera = new OrthographicCamera();
         int screenWidth = Gdx.graphics.getWidth();

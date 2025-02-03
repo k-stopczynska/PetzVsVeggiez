@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 
-import com.ainspiring.board.Board;
 import com.ainspiring.utils.LoggerFactory;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
