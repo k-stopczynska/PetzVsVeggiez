@@ -2,12 +2,16 @@ package com.ainspiring.utils.screens;
 
 import org.apache.logging.log4j.Logger;
 
+import com.ainspiring.PetzVeggiezGame;
 import com.ainspiring.utils.LoggerFactory;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -16,7 +20,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class NewPlayerScreen extends ApplicationAdapter implements Screen {
 
@@ -24,10 +30,13 @@ private static final Logger LOGGER = LoggerFactory.getLogger(NewPlayerScreen.cla
 
     private Stage stage;
     private Skin skin;
+    private TextureAtlas atlas;
     private TextField nameInput;
-    private Game game;
+    private PetzVeggiezGame game;
+    private Viewport viewport;
+    private OrthographicCamera camera;
 
-    public NewPlayerScreen(Game game) {
+    public NewPlayerScreen(PetzVeggiezGame game) {
         this.game = game;
     }
 
@@ -52,18 +61,23 @@ private static final Logger LOGGER = LoggerFactory.getLogger(NewPlayerScreen.cla
 
     @Override
     public void render(float delta) {
-        LOGGER.info("Rendering...");
         stage.act(delta);
         stage.draw();
     }
 
     @Override
     public void show() {
-        LOGGER.info("Showing the new player screen...");
-        stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
+        camera = new OrthographicCamera();
+        viewport = new FitViewport(800, 600, camera);
+        viewport.apply();
 
-        skin = new Skin(Gdx.files.internal("rainbow-ui.json"));
+        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
+        camera.update();
+        stage = new Stage(viewport);
+        game.setInputProcessor(stage);
+
+        atlas = new TextureAtlas("rainbow-ui.atlas");
+        skin = new Skin(Gdx.files.internal("rainbow-ui.json"), atlas);
 
         Table table = new Table();
         table.setFillParent(true);
@@ -84,9 +98,10 @@ private static final Logger LOGGER = LoggerFactory.getLogger(NewPlayerScreen.cla
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 String playerName = nameInput.getText().trim();
-                if (!playerName.isEmpty()) {
+                 if (!playerName.isEmpty()) {
                     saveNewPlayer(playerName);
                     LOGGER.info("Player Name: " + playerName);
+                    game.setScreen(new MainGameScreen(game));
                 }
             }
         });

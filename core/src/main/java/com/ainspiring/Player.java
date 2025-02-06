@@ -3,12 +3,12 @@ package com.ainspiring;
 
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
 import com.ainspiring.entities.Entity;
 import com.ainspiring.utils.LoggerFactory;
 import com.ainspiring.utils.PetHub;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
 
 public class Player {
 
@@ -36,7 +36,6 @@ public class Player {
         Preferences prefs = Gdx.app.getPreferences("PlayerProgress");
         this.name = prefs.getString("playerName", "PlayerOne");
         this.level = prefs.getInteger("playerLevel", 1);
-        LOGGER.info("Loading player's progress: " + prefs.getString("playerName") + ", level: " + prefs.getInteger("playerLevel"));
     }
 
 
