@@ -106,7 +106,7 @@
 					"name": "MEOWSTER",
 					"image": "mana_cat_1.png",
 					"health": 100,
-					"cost": 30,
+					"cost": 10,
 					"mana": 20,
 					"interval": 6
 				}

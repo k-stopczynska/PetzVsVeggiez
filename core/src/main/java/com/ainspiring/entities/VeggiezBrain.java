@@ -8,7 +8,6 @@ import com.ainspiring.utils.LoggerFactory;
 import com.ainspiring.utils.prototypes.VeggiezPrototype;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import java.util.Random;
 import java.util.Set;
 import java.util.ArrayList;
@@ -32,8 +31,8 @@ public class VeggiezBrain {
     public VeggiezBrain(Board board) {
         this.veggies = new ArrayList<Veggie>();
         this.elapsedTime = 0;
-        this.spawnInterval = 25f; 
-        this.waveDuration = 180f;
+        this.spawnInterval = 15f; 
+        this.waveDuration = 60f;
         this.board = board;
         this.configLoader = new ConfigLoader();
         configLoader.loadConfig();
@@ -109,12 +108,22 @@ public class VeggiezBrain {
         return !isWaveActive || (elapsedTime - waveStartTime >= waveDuration);
     }
 
+    public boolean isRoundOver() {
+        return (elapsedTime - waveStartTime >= waveDuration);
+    }
+
+    public boolean getIsWaveActive() {
+        return isWaveActive;
+    }
+
     public void stopWave() {
-        isWaveActive = false;
         elapsedTime = 0;
+        LOGGER.info("wave stopped");
         for (Veggie veggie : veggies) {
             veggie.dispose();
         }
         veggies.clear();
+        LOGGER.info("setting wave to inactive");
+        isWaveActive = false;
     }
-    }
+}

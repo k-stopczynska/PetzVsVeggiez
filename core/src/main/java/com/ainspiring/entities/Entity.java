@@ -40,7 +40,16 @@ private static final Logger LOGGER = LoggerFactory.getLogger(Entity.class);
         // sprite.setScale(4f);
     }
     
-    public abstract void update(float delta);
+    public void update(float delta) {
+        LOGGER.info("Updating entity... checking health status...");
+        if (this.health <= 0) {
+            LOGGER.info("this entity should be removed...");
+            if (occupiedCell != null) {
+                occupiedCell.setIsOccupied(false);
+            }
+            this.setPosition(position.x, 2000); 
+        }
+    };
 
     public abstract Entity clone();
 
@@ -51,12 +60,12 @@ private static final Logger LOGGER = LoggerFactory.getLogger(Entity.class);
 
     public void takeDamage(int damage) {
         this.health -= damage;
-        if (this.health <= 0) {
-            if (occupiedCell != null) {
-                occupiedCell.setIsOccupied(false);
-            }
-            this.setPosition(position.x, 2000); 
-        }
+        // if (this.health <= 0) {
+        //     if (occupiedCell != null) {
+        //         occupiedCell.setIsOccupied(false);
+        //     }
+        //     this.setPosition(position.x, 2000); 
+        // }
     }
 
     public void setPosition(float x, float y) {
@@ -123,6 +132,10 @@ private static final Logger LOGGER = LoggerFactory.getLogger(Entity.class);
 
     public int getHealth() {
         return this.health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public void dispose() {

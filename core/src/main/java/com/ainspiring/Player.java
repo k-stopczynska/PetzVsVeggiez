@@ -45,7 +45,8 @@ public class Player {
 
     public void levelUp() {
         this.level++;
-        this.pets.clear();
+        // TODO: uncomment this when level selection of pets will be
+        //this.pets.clear();
         this.gatheredMana = 30;
         this.saveProgress();
     }

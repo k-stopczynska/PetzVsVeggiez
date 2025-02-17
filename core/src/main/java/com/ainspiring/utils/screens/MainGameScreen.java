@@ -34,6 +34,9 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class MainGameScreen implements Screen, InputProcessor {
+
+   private static final Logger LOGGER = LoggerFactory.getLogger(MainGameScreen.class);
+
     private PetzVeggiezGame game;
     private Viewport viewport;
     private OrthographicCamera camera;
@@ -49,8 +52,9 @@ public class MainGameScreen implements Screen, InputProcessor {
     private Vector3 touchPosition;
     private Entity selectedPet;
     private boolean dragging;
-    private boolean isWinner = false;
     private boolean isLoser = false;
+    private boolean isWinner = false;
+    private boolean isFirstGame = true;
 
         // public final static float SCALE = 32f;
 	// public final static float INV_SCALE = 1.f/SCALE;
@@ -96,7 +100,41 @@ public class MainGameScreen implements Screen, InputProcessor {
         board.render();
         veggiezBrain.update(delta);
 
-        if (veggiezBrain.isWaveOver()) {
+        if (veggiezBrain.isWaveOver() && !isFirstGame)
+        {
+            LOGGER.info("Time is up, player won");
+            isWinner = true;
+        }
+       
+        if (veggiezBrain.isWaveOver() && isFirstGame) {
+            LOGGER.info("Starting loading progress on new game...");
+            LOGGER.info("Player " + player.getName() + " is on level " + player.getLevel());
+            player.loadProgress();
+            board.clearPetsOnBoard();
+            isFirstGame = false;
+            // TODO: loading game screen
+            veggiezBrain.startWave();
+        }
+
+        if (isWinner) {
+            board.clearPetsOnBoard();
+            LOGGER.info("Starting new level");
+            player.levelUp();
+            LOGGER.info("Player " + player.getName() + " level up to " + player.getLevel());
+
+            isWinner = false;
+            //TODO: level up screen
+            veggiezBrain.startWave();
+        }
+
+        if (isLoser) {
+            LOGGER.info("Player lost, game over, loading same level");
+            veggiezBrain.stopWave();
+            board.clearPetsOnBoard();
+            //TODO: game over screen
+
+            player.resetLevel();
+            isLoser = false;
             veggiezBrain.startWave();
         }
 
@@ -124,18 +162,13 @@ public class MainGameScreen implements Screen, InputProcessor {
             }
             if (pet instanceof ManaPet) {
                 ManaPet manaPet = (ManaPet) pet;
-                if (manaPet.getHasGeneratedMana()) spawnManaStar(manaPet);
+                if (manaPet.getHasGeneratedMana())
+                    spawnManaStar(manaPet);
             }
         }
 
         if (dragging && selectedPet != null) {
             selectedPet.draw(batch);
-        }
-
-        if (isLoser) {
-            veggiezBrain.stopWave();
-            player.resetLevel();
-            board.clearPetsOnBoard();
         }
 
         batch.end();

@@ -115,6 +115,7 @@ public class Board {
 
     public void clearPetsOnBoard() {
         for (Entity entity : petsOnBoard) {
+            entity.setHealth(0);
             entity.setPlaced(false);
             entity.dispose();
         }
